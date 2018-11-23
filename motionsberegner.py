@@ -20,10 +20,12 @@ def setup_udp_socket():
     return server
 
 def get_sense_data():
+    accl = sense.get_accelerometer_raw()
+
     sense_data = {
-        'temp': round(sense.get_temperature(), 1),
-        'press': round(sense.get_pressure(), 1),
-        'hum': round(sense.get_humidity(), 1),
+        'x': round(accl['x']),
+        'y': round(accl['y']),
+        'z': round(accl['z']),
         'date': datetime.now()
     }
     
