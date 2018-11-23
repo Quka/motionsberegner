@@ -16,16 +16,19 @@ def setup_udp_socket():
     # indefinitely when trying to receive data.
     server.settimeout(0.2)
 
-    server.bind(("", 44441))
+    # Bind randomly
+    #server.bind(("", 44441))
     return server
 
 def get_sense_data():
     accl = sense.get_accelerometer_raw()
 
+    # round() round to 2 nearest digits and get absolute value
+    # abs() turns negative to positive - because we don't care about the direction (backwards/forward), only that it moves
     sense_data = {
-        'x': round(accl['x'], 2),
-        'y': round(accl['y'], 2),
-        'z': round(accl['z'], 2),
+        'x': abs(round(accl['x'], 2)),
+        'y': abs(round(accl['y'], 2)),
+        'z': abs(round(accl['z'], 2)),
         'date': datetime.now()
     }
     
