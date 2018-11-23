@@ -23,9 +23,9 @@ def get_sense_data():
     accl = sense.get_accelerometer_raw()
 
     sense_data = {
-        'x': round(accl['x']),
-        'y': round(accl['y']),
-        'z': round(accl['z']),
+        'x': accl['x'],
+        'y': accl['y'],
+        'z': accl['z'],
         'date': datetime.now()
     }
     
