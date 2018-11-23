@@ -50,4 +50,4 @@ while True:
         server.sendto(dataBytes, ('<broadcast>', 37020))
 
         # Show a message on the display
-        sense.show_message( "s", scroll_speed=0.05 )
+        #sense.show_message( "s", scroll_speed=0.05 )
