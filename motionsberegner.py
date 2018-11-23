@@ -2,10 +2,25 @@ from sense_hat import SenseHat
 import socket
 from datetime import datetime
 import json
+import urllib
 
 sense = SenseHat() # init sensehat
 timestamp = datetime.now() # set timer for use later
 delay = 0.2 # delay in seconds (1/10 of a sec)
+
+def check_internet_conn():
+    online = False
+
+    try:
+        urllib.request.urlopen("http://www.google.com").close()
+    except urllib.request.URLError:
+        print ("not connected")
+        online = False
+    else:
+        print("connected")
+        online = True
+    
+    return online
 
 def setup_udp_socket():
     # Setup UDP socket for broadcasting
@@ -19,7 +34,7 @@ def setup_udp_socket():
     # Bind randomly
     #server.bind(("", 44441))
     return server
-
+ 
 def get_sense_data():
     accl = sense.get_accelerometer_raw()
 
@@ -31,18 +46,22 @@ def get_sense_data():
         'z': abs(round(accl['z'], 2)),
         'date': datetime.now()
     }
-    
+
     return sense_data
 
 # init server
 server = setup_udp_socket()
 
+# send the data with udp
 while True:
     data = get_sense_data()
     time = data["date"] - timestamp # træk timestamp fra datetime i data
 
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     if time.seconds > delay:
+        if( check_internet_conn() ):
+            data["online"] = "online test"
+        
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(data, default=str)).encode()
 
