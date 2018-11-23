@@ -16,7 +16,7 @@ def setup_udp_socket():
     # indefinitely when trying to receive data.
     server.settimeout(0.2)
 
-    server.bind(("", 44444))
+    server.bind(("", 44443))
     return server
 
 def get_sense_data():
