@@ -2,6 +2,7 @@ from sense_hat import SenseHat
 import socket
 from datetime import datetime
 import json
+from time import sleep
 #import urllib2
 
 sense = SenseHat() # init sensehat
@@ -48,7 +49,7 @@ while True:
     if time.seconds > delay:
 
         
-        print(data["x"], data["y"], data["z"])
+        print(data["x"] + "  " + data["y"] + "   " +  data["z"])
 
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(data, default=str)).encode()
@@ -58,3 +59,4 @@ while True:
 
         # Show a message on the display
         #sense.show_message( "s", scroll_speed=0.05 )
+    sleep(1)
