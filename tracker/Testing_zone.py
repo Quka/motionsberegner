@@ -11,19 +11,7 @@ timestamp = datetime.now() # set timer for use later
 delay = 0.2 # delay in seconds (1/10 of a sec)
 
 
-def setup_udp_socket():
-    # Setup UDP socket for broadcasting
-    server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
-    server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
-    # Set a timeout so the socket does not block
-    # indefinitely when trying to receive data.
-    server.settimeout(0.2)
-
-    # Bind randomly
-    #server.bind(("", 44441))
-    return server
- 
 def get_sense_data():
     accl = sense.get_accelerometer_raw()
 
@@ -37,9 +25,6 @@ def get_sense_data():
     }
 
     return sense_data
-
-# init server
-server = setup_udp_socket()
 
 
 with open("C:\source\Important tasks\3.sem Project\Accl_data.csv", "a") as log:
