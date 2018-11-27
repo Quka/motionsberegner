@@ -46,23 +46,5 @@ with open("/home/pi/cpu_temp.csv", "a") as log
 
 # send the data with udp
 while True:
-    data = get_sense_data()
-    time = data["date"] - timestamp # træk timestamp fra datetime i data
-
-    # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
-    if time.seconds > delay:
-
-        
-        print(data["x"], data["y"], data["z"])
-
-        log.write("{0},data["x"], data["y"], data["z"])
-
-        # Convert dictionary to JSON Object (str) and then to bytes
-        dataBytes = (json.dumps(data, default=str)).encode()
-
-        # Broadcast message to port 37020 via UDP Socket
-        server.sendto(dataBytes, ('<broadcast>', 37020))
-
-        # Show a message on the display
-        #sense.show_message( "s", scroll_speed=0.05 )
-    sleep(0.2)
+    data = get_sense_data
+    log.write("{0},{1}\n".format(strftime("%Y-%m-%d %H:%M:%S"),str(data)))
