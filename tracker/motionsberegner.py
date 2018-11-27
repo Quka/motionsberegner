@@ -30,8 +30,8 @@ def get_sense_data():
     sense_data = {
         'x': abs(round(accl['x'], 2)),
         'y': abs(round(accl['y'], 2)),
-        'z': abs(round(accl['z'], 2)),
-        'date': datetime.now()
+        'z': abs(round(accl['z'], 2))
+        #'date': datetime.now()
     }
 
     return sense_data
@@ -42,10 +42,10 @@ server = setup_udp_socket()
 # send the data with udp
 while True:
     data = get_sense_data()
-    time = data["date"] - timestamp # træk timestamp fra datetime i data
+    #time = data["date"] - timestamp # træk timestamp fra datetime i data
 
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
-    if time.seconds > delay:
+   # if time.seconds > delay:
 
         # For testing the values of a step
         print(data)
