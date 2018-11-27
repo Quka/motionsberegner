@@ -21,10 +21,10 @@ def get_sense_data():
     sense_data.append(acc["z"])
     
     return sense_data
-
+steps = 0
 def step_counter():
     
-    steps = 0
+    
 
     x, y, z = sense.get_accelerometer_raw().values()
 
