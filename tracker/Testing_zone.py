@@ -42,7 +42,7 @@ def get_sense_data():
 server = setup_udp_socket()
 
 
-with open("/home/pi/cpu_temp.csv", "a") as log
+with open("C:\source\Important tasks\3.sem Project\Accl_data.csv", "a") as log
 
 # send the data with udp
 while True:
