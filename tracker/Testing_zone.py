@@ -3,7 +3,7 @@ import socket
 from datetime import datetime
 import json
 from time import sleep, strftime, time
-import matplotlib.pyplot as plt
+
 #import urllib2
 
 sense = SenseHat() # init sensehat
