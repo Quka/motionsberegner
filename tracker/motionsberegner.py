@@ -8,20 +8,6 @@ sense = SenseHat() # init sensehat
 timestamp = datetime.now() # set timer for use later
 delay = 0.2 # delay in seconds (1/10 of a sec)
 
-# virker ikke
-def check_internet_conn():
-    online = False
-
-    try:
-        urllib2.urlopen("http://www.google.com").close()
-    except urllib2.URLError:
-        print ("not connected")
-        online = False
-    else:
-        print("connected")
-        online = True
-    
-    return online
 
 def setup_udp_socket():
     # Setup UDP socket for broadcasting
@@ -60,6 +46,10 @@ while True:
 
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     if time.seconds > delay:
+
+        # For testing the values of a step
+        print(data)
+
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(data, default=str)).encode()
 
