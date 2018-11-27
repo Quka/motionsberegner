@@ -31,6 +31,6 @@ with open("C:\source\Important tasks\3.sem Project\Accl_data.csv", "a") as log:
 
 # send the data with udp
     while True:
-        data = get_sense_data
+        data = get_sense_data()
         log.write("{0},{1}\n".format(strftime("%Y-%m-%d %H:%M:%S"),str(data)))
         print(data)
