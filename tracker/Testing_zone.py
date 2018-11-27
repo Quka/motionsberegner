@@ -36,6 +36,6 @@ def step_counter():
 
 
 while True:
-    step_count = step_counter
+    step_count = step_counter()
     print(step_count)
     sleep(0.5)
