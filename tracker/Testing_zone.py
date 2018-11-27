@@ -28,5 +28,5 @@ with open("Accl_data.csv", "w", newline='') as log:
 
     while True:
         data = get_sense_data()
-        data_writer.writerow(data)
+        data_writer.writerow(data["x"])
     
