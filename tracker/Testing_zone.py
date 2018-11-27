@@ -23,7 +23,7 @@ def get_sense_data():
     return sense_data
 
 
-with open('data.csv', 'w', newline='') as log:
+with open('data1.csv', 'w', newline='') as log:
     writer = csv.writer(log)
     while True:
         data = get_sense_data()
