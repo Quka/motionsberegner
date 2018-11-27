@@ -3,7 +3,7 @@ import socket
 from datetime import datetime
 import json
 from time import sleep, strftime, time
-from csv import writer
+import csv
 
 #import urllib2
 
@@ -23,10 +23,9 @@ def get_sense_data():
     return sense_data
 
 
-with open("Accl_data.csv", "w", newline='') as log:
-    data_writer = writer(log)
-
+with open('data.csv', 'w', newline='') as log:
+    writer = csv.writer(log)
     while True:
         data = get_sense_data()
-        data_writer.writerow(data["x"])
+        writer.writerow(data)
     
