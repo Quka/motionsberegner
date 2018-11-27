@@ -29,10 +29,10 @@ def step_counter():
         steps = steps + 1
     if y>1.1:
         steps = steps + 1
-return steps
+
 
 
 while True:
-    step_count = step_counter()
-    print(step_count)
+    step_counter()
+    print(steps)
     sleep(0.5)
