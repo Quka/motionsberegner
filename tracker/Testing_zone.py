@@ -22,10 +22,20 @@ def get_sense_data():
     
     return sense_data
 
-
-with open('data1.csv', 'w', newline='') as log:
-    writer = csv.writer(log)
-    while True:
-        data = get_sense_data()
-        writer.writerow(data)
+def step_counter():
     
+    steps = 0
+
+    x, y, z = sense.get_accelerometer_raw().values()
+
+    if x>1.1:
+        steps = steps + 1
+    if y>1.1:
+        steps = steps + 1
+    return steps
+
+
+while True:
+    step_count = step_counter
+    print(step_count)
+    sleep(0.5)
