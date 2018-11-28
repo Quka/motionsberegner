@@ -13,17 +13,27 @@ delay = 0.2 # delay in seconds (1/10 of a sec)
 steps = 0
 
 def get_sense_data():
-    acc = sense.get_accelerometer_raw()
-    sense_data = []
-    sense_data.append(acc["x"])
-    sense_data.append(acc["y"])
-    sense_data.append(acc["z"])
+    accl = sense.get_accelerometer_raw()
+
+    # round() round to 2 nearest digits and get absolute value
+    # abs() turns negative to positive - because we don't care about the direction (backwards/forward), only that it moves
+    sense_data = {
+        'x': abs(round(accl['x'], 2)),
+        'y': abs(round(accl['y'], 2)),
+        'z': abs(round(accl['z'], 2)),
+        'date': datetime.now()
+    }
     
     return sense_data
 
 def step_counter():
    
-    x, y, z = sense.get_accelerometer_raw().values()
+    x, y, z =   sense.get_accelerometer_raw().values()
+
+    x = abs(round(z,2))
+    y = abs(round(z,2))
+    z = abs(round(z,2))
+
     step1 = steps
 
     if x>1.1:
