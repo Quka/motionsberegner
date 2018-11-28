@@ -35,10 +35,10 @@ def step_counter():
 
     step1 = steps
 
-    if x>1.5:
+    if x>1.7:
       step1 += 1
       sleep(0.4)
-    elif y>1.5:
+    elif y>1.7:
       step1 += 1
       sleep(0.4)
 
@@ -49,5 +49,6 @@ def step_counter():
 while True:
     steps = step_counter()
     print(steps)
+    print(get_sense_data())
     
     
