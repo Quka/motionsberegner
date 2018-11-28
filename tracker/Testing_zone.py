@@ -35,7 +35,7 @@ def step_counter():
 
     step1 = steps
 
-    if x>1 or y>1:
+    if x>2 or y>2:
       step1 += 1
       sleep(5)
 
