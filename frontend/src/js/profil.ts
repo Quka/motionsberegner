@@ -4,4 +4,3 @@ interface User {
     height: number;
     age: number;
 }
-

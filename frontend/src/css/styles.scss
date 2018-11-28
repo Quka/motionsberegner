@@ -1,15 +1,7 @@
-$fontColor: #0091aa;
-$colorHeading: #be4a14;
-#content  // div with id: content
-{
-    color: $fontColor;
-}
+//@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+//@import "custom";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
-h2
-{
-    color: $colorHeading;
-}
-
-h1{
-    @extend h2;
+.wrapper {
+    background: #f0f0f0;
 }
