@@ -35,10 +35,10 @@ def step_counter():
 
     step1 = steps
 
-    if x>2:
+    if x>1.7:
       step1 += 1
       sleep(0.4)
-    elif y>2:
+    elif y>1.7:
       step1 += 1
       sleep(0.4)
 
