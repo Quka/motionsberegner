@@ -20,10 +20,9 @@ def get_sense_data():
     sense_data = {
         'x': abs(round(accl['x'], 2)),
         'y': abs(round(accl['y'], 2)),
-        'z': abs(round(accl['z'], 2)),
-        'date': datetime.now()
+        'z': abs(round(accl['z'], 2))
     }
-    
+
     return sense_data
 
 def step_counter():
