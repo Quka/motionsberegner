@@ -38,7 +38,7 @@ def get_sense_data():
 
 # init server
 server = setup_udp_socket()
-datalog = []
+datalog = {}
 # send the data with udp
 while True:
     
