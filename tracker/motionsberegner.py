@@ -38,16 +38,23 @@ def get_sense_data():
 
 # init server
 server = setup_udp_socket()
-
+datalog = []
 # send the data with udp
 while True:
+    
+    
     data = get_sense_data()
     time = data["date"] - timestamp # træk timestamp fra datetime i data
+    datalog.append(data)
+
 
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     if time.seconds > delay:
+
+
+        
         # Convert dictionary to JSON Object (str) and then to bytes
-        dataBytes = (json.dumps(data, default=str)).encode()
+        dataBytes = (json.dumps(datalog, default=str)).encode()
 
         # Broadcast message to port 37020 via UDP Socket
         server.sendto(dataBytes, ('<broadcast>', 37020))
