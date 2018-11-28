@@ -2,8 +2,6 @@ from sense_hat import SenseHat
 import socket
 from datetime import datetime
 import json
-from time import sleep, strfttime, time
-import matplotlib.pyplot as plt
 #import urllib2
 
 sense = SenseHat() # init sensehat
@@ -41,9 +39,6 @@ def get_sense_data():
 # init server
 server = setup_udp_socket()
 
-
-with open("/home/pi/cpu_temp.csv", "a") as log
-
 # send the data with udp
 while True:
     data = get_sense_data()
@@ -51,12 +46,6 @@ while True:
 
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     if time.seconds > delay:
-
-        
-        print(data["x"], data["y"], data["z"])
-
-        log.write("{0},data["x"], data["y"], data["z"])
-
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(data, default=str)).encode()
 
@@ -65,4 +54,3 @@ while True:
 
         # Show a message on the display
         #sense.show_message( "s", scroll_speed=0.05 )
-    sleep(0.2)

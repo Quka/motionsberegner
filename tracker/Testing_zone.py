@@ -2,6 +2,8 @@ from sense_hat import SenseHat
 from datetime import datetime
 import json
 from time import sleep, strftime, time
+from plotly
+import matplotlib
 
 
 #import urllib2
@@ -24,25 +26,6 @@ def get_sense_data():
     }
 
     return sense_data
-
-def step_counter():
-   
-    x, y, z =   sense.get_accelerometer_raw().values()
-
-    x = abs(round(z,2))
-    y = abs(round(z,2))
-    z = abs(round(z,2))
-
-    step1 = steps
-
-    if x>1.5:
-      step1 += 1
-      sleep(0.4)
-    elif y>1.15:
-      step1 += 1
-      sleep(0.4)
-
-    return step1
 
 
 
