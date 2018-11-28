@@ -6,7 +6,7 @@ import json
 
 sense = SenseHat() # init sensehat
 timestamp = datetime.now() # set timer for use later
-delay = 10 # delay in seconds (1/10 of a sec)
+delay = 1 # delay in seconds (1/10 of a sec)
 
 
 def setup_udp_socket():
