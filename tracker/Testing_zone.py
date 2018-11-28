@@ -1,9 +1,8 @@
 from sense_hat import SenseHat
-import socket
 from datetime import datetime
 import json
 from time import sleep, strftime, time
-import csv
+
 
 #import urllib2
 
@@ -23,16 +22,19 @@ def get_sense_data():
     return sense_data
 
 def step_counter():
+   
     x, y, z = sense.get_accelerometer_raw().values()
+    step1 = steps
 
     if x>1.1:
-        steps = steps + 1
+      step1 += 1
     if y>1.1:
-        steps = steps + 1
+      step1 += 1
+    return step1
 
 
 
 while True:
-    step_counter()
+    steps = step_counter()
     print(steps)
     sleep(0.5)
