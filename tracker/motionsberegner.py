@@ -86,6 +86,7 @@ with open('./data2.csv', 'w', newline='') as csvfile:
             timestamp = datetime.now()
     '''
 
+'''
 # Save data with array
 while True:
 
@@ -109,4 +110,3 @@ while True:
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     #if time > delay:
 '''
-        
