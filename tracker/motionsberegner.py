@@ -6,7 +6,7 @@ import json
 
 sense = SenseHat() # init sensehat
 timestamp = datetime.now() # set timer for use later
-delay = 1 # delay in seconds (1/10 of a sec)
+delay = 0.2 # delay in seconds (1/10 of a sec)
 
 
 def setup_udp_socket():
@@ -41,18 +41,15 @@ server = setup_udp_socket()
 datalog = []
 # send the data with udp
 while True:
-    
-    
+
     data = get_sense_data()
     time = data["date"] - timestamp # træk timestamp fra datetime i data
     datalog.append(data)
 
-
+    
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
-    if time.seconds > delay:
-
-
-        
+    if len(datalog) > 100:
+                
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(datalog, default=str)).encode()
 
@@ -61,3 +58,4 @@ while True:
 
         # Show a message on the display
         #sense.show_message( "s", scroll_speed=0.05 )
+        datalog.clear()
