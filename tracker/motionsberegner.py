@@ -1,7 +1,7 @@
 from sense_hat import SenseHat
 import socket
 from datetime import datetime
-import csv
+from csv import writer
 import json
 #import urllib2
 
@@ -70,25 +70,26 @@ server = setup_udp_socket()
 datalog = []
 
 # Save data with file
-with open('data.csv', 'w', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(['x', 'y', 'z', 'date'])
+with open('data.csv', 'w', newline='') as csvfile:
+    data_writer = writer(csvfile)
+    data_writer.writerow(['x', 'y', 'z', 'date'])
 
+    '''
     while True:
         data = get_sense_data_array()
         dt = data[-1] - timestamp   # -1 means last element of array (which is date)
 
-        writer.writerow(data)
+        data_writer.writerow(data)
         print(data)
 
-        '''
+        
 
         # waits a certain amount before it reads and writes the data
         if dt.seconds > delay:
             writer.writerow(data)
             print(data)
             timestamp = datetime.now()
-        '''
+    '''
 
 '''
 # Save data with array
