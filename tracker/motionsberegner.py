@@ -71,8 +71,8 @@ datalog = []
 
 # Save data with file
 with open('data.csv', 'w', newline='') as f:
-    data_writer = writer(f)
-    data_writer.writerow(['x', 'y', 'z', 'date'])
+    writer = csv.writer(f)
+    writer.writerow(['x', 'y', 'z', 'date'])
 
     while True:
         data = get_sense_data_array()
@@ -80,7 +80,7 @@ with open('data.csv', 'w', newline='') as f:
 
         # waits a certain amount before it reads and writes the data
         if dt.seconds > delay:
-            data_writer.writerow(data)
+            writer.writerow(data)
             print(data)
             timestamp = datetime.now()
 
