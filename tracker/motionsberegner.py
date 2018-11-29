@@ -51,7 +51,7 @@ while True:
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     if time.seconds > delay:
 
-
+        datalog.clear()
         
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(datalog, default=str)).encode()
