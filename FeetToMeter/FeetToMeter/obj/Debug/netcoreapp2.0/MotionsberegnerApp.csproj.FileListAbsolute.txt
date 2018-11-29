@@ -1,0 +1,11 @@
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\bin\Debug\netcoreapp2.0\MotionsberegnerApp.deps.json
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\bin\Debug\netcoreapp2.0\MotionsberegnerApp.runtimeconfig.json
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\bin\Debug\netcoreapp2.0\MotionsberegnerApp.runtimeconfig.dev.json
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\bin\Debug\netcoreapp2.0\MotionsberegnerApp.dll
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\bin\Debug\netcoreapp2.0\MotionsberegnerApp.pdb
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\obj\Debug\netcoreapp2.0\MotionsberegnerApp.csproj.CoreCompileInputs.cache
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\obj\Debug\netcoreapp2.0\MotionsberegnerApp.AssemblyInfoInputs.cache
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\obj\Debug\netcoreapp2.0\MotionsberegnerApp.AssemblyInfo.cs
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\obj\Debug\netcoreapp2.0\MotionsberegnerApp.dll
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\obj\Debug\netcoreapp2.0\MotionsberegnerApp.pdb
+C:\Users\afg_k\source\repos\FeetToMeter\FeetToMeter\obj\Debug\netcoreapp2.0\MotionsberegnerApp.csprojAssemblyReference.cache
