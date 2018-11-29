@@ -81,6 +81,7 @@ with open('data.csv', 'w', newline='') as f:
         # waits a certain amount before it reads and writes the data
         if dt.seconds > delay:
             data_writer.writerow(data)
+            print(data)
             timestamp = datetime.now()
 
 '''
