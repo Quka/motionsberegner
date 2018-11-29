@@ -70,7 +70,7 @@ server = setup_udp_socket()
 datalog = []
 
 # Save data with file
-with open('data2.csv', 'w', newline='') as csvfile:
+with open('./data2.csv', 'w', newline='') as csvfile:
     data_writer = writer(csvfile)
     data_writer.writerow(['x', 'y', 'z', 'date'])
 
