@@ -41,8 +41,8 @@ server = setup_udp_socket()
 datalog = []
 # send the data with udp
 while True:
-    for a in range(0, 20):
     datalog.clear()
+    for a in range(0, 20):
     data = get_sense_data()
     time = data["date"] - timestamp # træk timestamp fra datetime i data
     datalog.append(data)
