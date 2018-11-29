@@ -9,8 +9,8 @@ console.log(p.showName());
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 let btn1: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton");
 
+btn1.addEventListener('click', removeElement);
 
-btn1.addEventListener('click', page1);
 
 
 function page1(): void {
@@ -19,12 +19,13 @@ function page1(): void {
     html += "<h3>Brugeroplysnigner</h3>";
 
     element.innerHTML = html;
-    removeElement();
+    
 }
 
 
 function removeElement() : void {
     // Removes an element from the document
-    var element = document.getElementById("");
-    element.parentNode.removeChild(element);
+    var element = document.getElementById("content");
+    element.innerHTML = "";
+    page1();
 }
