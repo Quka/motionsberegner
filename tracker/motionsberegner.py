@@ -6,7 +6,7 @@ import json
 
 sense = SenseHat() # init sensehat
 timestamp = datetime.now() # set timer for use later
-delay = 0.2 # delay in seconds (1/10 of a sec)
+delay = 1 # delay in seconds (1/10 of a sec)
 
 
 def setup_udp_socket():
@@ -21,6 +21,19 @@ def setup_udp_socket():
     # Bind randomly
     #server.bind(("", 44441))
     return server
+
+def is_connected(hostname):
+  try:
+    # see if we can resolve the host name -- tells us if there is
+    # a DNS listening
+    host = socket.gethostbyname(hostname)
+    # connect to the host -- tells us if the host is actually
+    # reachable
+    s = socket.create_connection((host, 80), 2)
+    return True
+  except:
+     pass
+  return False
  
 def get_sense_data():
     accl = sense.get_accelerometer_raw()
@@ -46,15 +59,24 @@ while True:
     time = data["date"] - timestamp # træk timestamp fra datetime i data
     datalog.append(data)
 
+    dataBytes = (json.dumps(is_connected("www.google.dk"), default=str)).encode()
     
+    '''
+    # Check if online, don't check all the time
+    # If online then try to upload
+    if(is_connected("www.google.dk")):
+
+        # Prøv at UDP Broadcaste 5 gange til en modtager (for at sikre at den sender)
+        # Kan potentielt fejlsende 5 gange (5 gange packet loss) så ikke 100% pålidelig
+        for i in range(5):
+            # Convert dictionary to JSON Object (str) and then to bytes
+            dataBytes = (json.dumps(datalog, default=str)).encode()
+
+            # Broadcast message to port 37020 via UDP Socket
+            server.sendto(dataBytes, ('<broadcast>', 37020))
+    '''
+
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
-    if len(datalog) > 100:
+    #if time > delay:
 
-        # Convert dictionary to JSON Object (str) and then to bytes
-        dataBytes = (json.dumps(datalog, default=str)).encode()
-
-        # Broadcast message to port 37020 via UDP Socket
-        server.sendto(dataBytes, ('<broadcast>', 37020))
-
-        # Show a message on the display
-        #sense.show_message( "s", scroll_speed=0.05 )
+        
