@@ -59,9 +59,9 @@ while True:
     time = data["date"] - timestamp # træk timestamp fra datetime i data
     datalog.append(data)
 
-    dataBytes = (json.dumps(is_connected("www.google.dk"), default=str)).encode()
+    dataBytes = (json.dumps(is_connected("www.xvasdf243q--.dk"), default=str)).encode()
     server.sendto(dataBytes, ('<broadcast>', 37020))
-    
+
     '''
     # Check if online, don't check all the time
     # If online then try to upload
