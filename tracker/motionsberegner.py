@@ -73,6 +73,7 @@ datalog = []
 with open('data.csv', 'w', newline='') as csvfile:
     data_writer = writer(csvfile)
     data_writer.writerow(['x', 'y', 'z', 'date'])
+    print(['x', 'y', 'z', 'date'])
 
     '''
     while True:
