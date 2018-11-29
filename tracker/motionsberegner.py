@@ -1,7 +1,7 @@
 from sense_hat import SenseHat
 import socket
 from datetime import datetime
-from csv import writer
+import csv
 import json
 #import urllib2
 
