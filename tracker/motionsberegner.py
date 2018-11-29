@@ -49,7 +49,7 @@ while True:
     
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     if len(datalog) > 100:
-                
+
         # Convert dictionary to JSON Object (str) and then to bytes
         dataBytes = (json.dumps(datalog, default=str)).encode()
 
@@ -58,4 +58,4 @@ while True:
 
         # Show a message on the display
         #sense.show_message( "s", scroll_speed=0.05 )
-        datalog.clear()
+        datalog.append([{"logDate": datetime.now}])
