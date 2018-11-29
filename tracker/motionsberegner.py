@@ -60,6 +60,7 @@ while True:
     datalog.append(data)
 
     dataBytes = (json.dumps(is_connected("www.google.dk"), default=str)).encode()
+    server.sendto(dataBytes, ('<broadcast>', 37020))
     
     '''
     # Check if online, don't check all the time
