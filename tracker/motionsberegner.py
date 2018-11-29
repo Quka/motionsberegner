@@ -78,11 +78,17 @@ with open('data.csv', 'w', newline='') as f:
         data = get_sense_data_array()
         dt = data[-1] - timestamp   # -1 means last element of array (which is date)
 
+        writer.writerow(data)
+        print(data)
+
+        '''
+
         # waits a certain amount before it reads and writes the data
         if dt.seconds > delay:
             writer.writerow(data)
             print(data)
             timestamp = datetime.now()
+        '''
 
 '''
 # Save data with array
