@@ -74,7 +74,7 @@ with open('./data2.csv', 'w', newline='') as csvfile:
     data_writer = writer(csvfile)
     data_writer.writerow(['x', 'y', 'z', 'date'])
 
-    
+    '''
     while True:
         data = get_sense_data_array()
         dt = data[-1] - timestamp   # -1 means last element of array (which is date)
@@ -84,8 +84,8 @@ with open('./data2.csv', 'w', newline='') as csvfile:
             data_writer.writerow(['x', 'y', 'z', 'date'])
             print(data)
             timestamp = datetime.now()
+    '''
 
-'''
 # Save data with array
 while True:
 
