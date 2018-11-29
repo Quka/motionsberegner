@@ -58,4 +58,3 @@ while True:
 
         # Show a message on the display
         #sense.show_message( "s", scroll_speed=0.05 )
-        datalog.append([{"logDate": datetime.now}]) 
