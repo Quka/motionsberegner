@@ -43,9 +43,9 @@ datalog = []
 while True:
     datalog.clear()
     for a in range(0, 20):
-    data = get_sense_data()
-    time = data["date"] - timestamp # træk timestamp fra datetime i data
-    datalog.append(data)
+        data = get_sense_data()
+        time = data["date"] - timestamp # træk timestamp fra datetime i data
+        datalog.append(data)
 
     a = 0
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
