@@ -12,8 +12,11 @@ export class Profile {
         this.name = name;
     }
     
-
     showName(): string {
         return this.name;
     }
+}
+
+interface IProfile {
+    
 }
