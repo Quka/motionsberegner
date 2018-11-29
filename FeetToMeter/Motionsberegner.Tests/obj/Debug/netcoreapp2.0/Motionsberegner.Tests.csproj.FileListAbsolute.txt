@@ -1,0 +1,17 @@
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Motionsberegner.Tests.deps.json
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Motionsberegner.Tests.runtimeconfig.json
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Motionsberegner.Tests.runtimeconfig.dev.json
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Motionsberegner.Tests.dll
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\Motionsberegner.Tests.pdb
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\MotionsberegnerApp.dll
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\bin\Debug\netcoreapp2.0\MotionsberegnerApp.pdb
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.csprojAssemblyReference.cache
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.csproj.CoreCompileInputs.cache
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.AssemblyInfoInputs.cache
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.AssemblyInfo.cs
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.csproj.CopyComplete
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.dll
+C:\Users\afg_k\source\repos\FeetToMeter\Motionsberegner.Tests\obj\Debug\netcoreapp2.0\Motionsberegner.Tests.pdb
