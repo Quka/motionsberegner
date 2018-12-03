@@ -80,7 +80,7 @@ with open('./data2.csv', 'w', newline='') as csvfile:
         #dt = data[-1] - timestamp   # -1 means last element of array (which is date)
         # waits a certain amount before it reads and writes the data
         #if dt.seconds > delay:
-        data_writer.writerow(['x', 'y', 'z', 'date'])
+        data_writer.writerow(data)
         print(data)
             #timestamp = datetime.now()
 
