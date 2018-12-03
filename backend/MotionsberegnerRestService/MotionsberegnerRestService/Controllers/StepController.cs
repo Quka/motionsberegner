@@ -20,9 +20,9 @@ namespace MotionsberegnerRestService.Controllers
         [HttpGet]
         public List<StepData> GetAllData()
         {
-            var result = new List<StepData>();
+            List<StepData> result = new List<StepData>();
 
-            string sql = "SELECT id, skridt, meter, kilometer, date FROM StepData "; //SQL Command
+            string sql = "SELECT id, steps, logDate FROM StepData "; //SQL Command
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -37,23 +37,13 @@ namespace MotionsberegnerRestService.Controllers
                             while (reader.Read())
                             {
                                 int id = reader.GetInt32(0);
-                                int skridt = reader.GetInt32(0);
-                                double meter = reader.GetDouble(0);
-                                double kilometer = reader.GetDouble(0);
-                                DateTime date = reader.GetDateTime(3);
-                              
-                                var stepData = new StepData()
-                                {
-                                    Id = id,
-                                    Skridt = skridt,
-                                    Meter = meter,
-                                    Km = kilometer,
-                                    Date = date,
-                                   
+                                int fId = reader.GetInt32(1);
+                                int steps = reader.GetInt32(2);
+                                DateTime logDate = reader.GetDateTime(3);
 
-                                };
+                                StepData sd = new StepData(id, fId, steps, logDate);
 
-                                result.Add(stepData);
+                                result.Add(sd);
                             }
 
                         }
@@ -65,7 +55,7 @@ namespace MotionsberegnerRestService.Controllers
         }
 
         // GET: api/Step/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetStep")]
         public string Get(int id)
         {
             return "value";
