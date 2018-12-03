@@ -95,7 +95,9 @@ function page2(): void {
     "<h7>Vægt</h7><br>" + 
     "<input id=input placeholder='Indtast vægt her'><br><br>" +
     "<h7>Højde</h7><br>" + 
-    "<input id=input placeholder='Indtast højde her'><br><br>";
+    "<input id=input placeholder='Indtast højde her'><br><br>"+
+
+    "   <button id=opretButton>Gem og opret profil</button>";
     
     element.innerHTML = html;
 }
