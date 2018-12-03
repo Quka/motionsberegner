@@ -27,7 +27,7 @@ namespace MotionsberegnerRestService.Controllers
         //    new Profile(5, "King", "Khan", 1975)
         //};
 
-        // GET: api/Profile/5
+        // GET: api/Profile
         [HttpGet]
         public List<Profile> GetAllProfiles()
         {
@@ -35,9 +35,11 @@ namespace MotionsberegnerRestService.Controllers
 
             //NEDENFOR ER KODE TIL AT HENTE PROFILER FRA EN TABEL I EN DATABASE FRA STIEN SKREVET IND LÆNGERE OPPE(conn).
 
-            var result = new List<Profile>();
+            List<Profile> result = new List<Profile>();
 
-            string sql = "SELECT id, firstname, lastname, birthday FROM profil "; //SQL Command
+            string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
+                         "INNER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
+            
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -49,22 +51,29 @@ namespace MotionsberegnerRestService.Controllers
                     {
                         if (reader.HasRows)
                         {
+                            Profile profile = null;
+
                             while (reader.Read())
                             {
-                                int id = reader.GetInt32(0);
-                                string firstname = reader.GetString(1);
-                                string lastname = reader.GetString(2);
-                                DateTime birthday = reader.GetDateTime(3);
 
-                                var profile = new Profile()
+                                if (profile == null || profile.ID != reader.GetInt32(0))
                                 {
-                                    ID = id,
-                                    FirstName = firstname,
-                                    LastName = lastname,
-                                    Birthday = birthday
-                                };
+                                    profile = new Profile(
+                                        reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetString(2),
+                                        reader.GetDateTime(3)
+                                    );
+                                }
 
-                                result.Add(profile);
+                                profile.Steps.Add(
+                                    new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+                                );
+                                if (!result.Exists(p => p.ID == profile.ID))
+                                {
+                                    result.Add(profile);
+                                }
+                                
                             }
 
                         }
@@ -73,11 +82,10 @@ namespace MotionsberegnerRestService.Controllers
             }
 
             return result;
-
         }
 
         // GET: api/Profile/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetProfile")]
         public Profile GetOneProfile(int ID)
         {
             Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action

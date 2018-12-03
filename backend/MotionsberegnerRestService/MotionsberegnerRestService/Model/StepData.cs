@@ -5,18 +5,16 @@ namespace MotionsberegnerRestService.Model
     public class StepData
     {
         public int Id { get; set; }
-        public int Skridt { get; set; }
-        public double Meter { get; set; }
-        public double Km { get; set; }
-        public DateTime Date { get; set; }
+        public int FId { get; set; }
+        public int Steps { get; set; }
+        public DateTime LogDate { get; set; }
 
-        public StepData(int id, int skridt, double meter, double km, DateTime date)
+        public StepData(int id, int fId, int steps, DateTime logDate)
         {
             Id = id;
-            Skridt = skridt;
-            Meter = meter;
-            Km = km;
-            Date = date;
+            FId = fId;
+            Steps = steps;
+            LogDate = logDate;
         }
 
         public StepData()
