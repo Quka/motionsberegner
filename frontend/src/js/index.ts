@@ -1,13 +1,7 @@
 import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index";
+import { IProfile } from "./IProfile";
 
-import { Profile } from "./Profile";
-import { IProfile } from "./Profile";
-
-let p = new Profile("Rasmus");
-console.log(p.showName());
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
-
-
 let lastPage = "";
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 
