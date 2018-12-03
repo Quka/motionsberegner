@@ -90,9 +90,10 @@ namespace MotionsberegnerRestService.Controllers
         {
             Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action
 
-            string sql = "SELECT * FROM profil WHERE id=" + ID; //SQL Command
+            string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
+                         "INNER JOIN stepData ON profil.id = stepData.profileId WHERE profil.id = " + ID; //SQL Command
 
-            Profile profil = null;
+            Profile profile = null;
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -106,24 +107,25 @@ namespace MotionsberegnerRestService.Controllers
                         {
                             while (reader.Read())
                             {
-                                int id = reader.GetInt32(0);
-                                string firstname = reader.GetString(1);
-                                string lastname = reader.GetString(2);
-                                DateTime birthday = reader.GetDateTime(3);
-
-                                profil = new Profile()
+                                if (profile == null)
                                 {
-                                    ID = id,
-                                    FirstName = firstname,
-                                    LastName = lastname,
-                                    Birthday = birthday
-                                };
+                                    profile = new Profile(
+                                        reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetString(2),
+                                        reader.GetDateTime(3)
+                                    );
+                                }
+
+                                profile.Steps.Add(
+                                    new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+                                );
                             }
                         }
                     }
                 }
             }
-            return profil;
+            return profile;
         }
 
         // POST: api/Profile
