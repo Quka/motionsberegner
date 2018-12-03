@@ -69,7 +69,7 @@ def get_sense_data_array():
 server = setup_udp_socket()
 datalog = []
 
-'''
+
 # Save data with file
 with open('./data2.csv', 'w', newline='') as csvfile:
     data_writer = writer(csvfile)
@@ -83,9 +83,9 @@ with open('./data2.csv', 'w', newline='') as csvfile:
         data_writer.writerow(['x', 'y', 'z', 'date'])
         print(data)
             #timestamp = datetime.now()
-'''  
 
 
+'''
 # Save data with array
 while True:
 
@@ -108,3 +108,4 @@ while True:
 
     # Sæt et delay for hvor ofte den skal læse data (delay = 1 sekund)
     #if time > delay:
+'''
