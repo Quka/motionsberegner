@@ -1,38 +1,47 @@
 import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index";
 import { IProfile } from "./IProfile";
 
+// URL to our online webservice
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile";
-let lastPage = "";
+
+// Content is used to fill the html page
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 
+// Move to login page button
 let btn1: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton"); // LOGIN PAGE
 btn1.addEventListener('click', removeToProfil);
 
+// Move to create profile page button
 let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton"); // OPRET PAGE
 btn2.addEventListener('click', removeToOpret);
 
 //let backButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("backButton") //BACK TO HOMEPAGE
 //backButton.addEventListener('click', backToHomePage);
 
-// GET PROFILE BY ID
+// Get profile by id button
 let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
 let btn3: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getButton");
 btn3.addEventListener('click', getProfileById)
 
-// GET ALL PROFILES
+// Get all profiles button
 let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
 let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
 btn4.addEventListener('click', getAllProfiles)
 
+// Create profile button
 //let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
 let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
 btn5.addEventListener('click', createProfile)
 
+// Delete profile button
+let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
+btn6.addEventListener('click', deleteProfile)
+
+let lastPage = "";
 
 //let resultOfNewProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("")
 
-
-
+// Main page
 function homepage(): void 
 {
     lastPage = "homepage";
@@ -43,6 +52,7 @@ function homepage(): void
     "<button id=opretButton>Opret profil</button>"
 }
 
+// Profile page
 function page1(): void {
     lastPage = "page1";
     let html = "";
@@ -61,9 +71,7 @@ function page1(): void {
     // Indsæt database data her
     "<h7>Antal skridt</h7><br><br>" +
 
-
     "<button id='backButton'>Tilbage</button>"+
-
 
     "<div id='userResult'></div>";
     interface IProfile {
@@ -73,6 +81,7 @@ function page1(): void {
     }
 }
 
+// Create new profile page
 function page2(): void {
     lastPage = "page2";
     let html = "";
@@ -95,6 +104,7 @@ function page2(): void {
     element.innerHTML = html;
 }
 
+// Go to profile page
 function removeToProfil() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
@@ -102,6 +112,7 @@ function removeToProfil() : void {
     page1();
 }
 
+// Move to create profile function
 function removeToOpret() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
@@ -109,6 +120,7 @@ function removeToOpret() : void {
     page2();
 }
 
+// Back button
 function backToHomePage(): void {
     // Removes an element from the document
     //var element = document.getElementById("content");
@@ -123,6 +135,7 @@ function backToHomePage(): void {
     }
 }
 
+// Get profile by id function
 function getProfileById(): void {
        let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
        let result  = uri + id.value;
@@ -134,6 +147,7 @@ function getProfileById(): void {
     })
 }
 
+// Get all profiles function
 function getAllProfiles():void {
     let res: string = "<ul>";
 
@@ -149,9 +163,9 @@ function getAllProfiles():void {
         res += "</ul>";
         AllProfiles.innerHTML = res;
     });
-
 }
 
+// Create profile function
 function createProfile(): void {
         let firstName : HTMLInputElement = <HTMLInputElement> document.getElementById("firstName");
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
@@ -169,14 +183,21 @@ function createProfile(): void {
         .catch((error:AxiosError) => {
             console.log(error);
         })
-    }
-
+}
     
-// function deleteProfile(): void {
-//         let id : HTMLInputElement = document.getElementById("deleteId") as HTMLInputElement;
-//         let result = uri + id.value;
+// Delete function
+function deleteProfile(): void {
+    let id : HTMLInputElement = document.getElementById("idToDelete") as HTMLInputElement;
+    let result = uri + id.value;
+    axios.delete(result);
+}
 
-//     axios.delete(result);
-//     }
 
-        
+// BMI calculator
+function calculateBMI(weight: number, height: number):void {   
+    const bmi = Math.round(weight / Math.pow((height/100), 2)); 
+ 
+    const BMI: HTMLDivElement = <HTMLDivElement> document.getElementById("bmi");
+    BMI.innerText = "BMI: " + bmi.toString();
+}  
+calculateBMI(this.Profile.weight, this.Profile.height);
