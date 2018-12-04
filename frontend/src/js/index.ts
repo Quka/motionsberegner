@@ -4,7 +4,6 @@ import { IProfile } from "./IProfile";
 // URL to our online webservice
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile";
 
-
 // Content is used to fill the html page
 let lastPage: string = "";
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
@@ -212,7 +211,6 @@ function deleteProfile(): void {
     axios.delete(result);
 }
 
-
 // BMI calculator
 function calculateBMI(weight: number, height: number):void {   
     const bmi = Math.round(weight / Math.pow((height/100), 2)); 
@@ -220,4 +218,4 @@ function calculateBMI(weight: number, height: number):void {
     const BMI: HTMLDivElement = <HTMLDivElement> document.getElementById("bmi");
     BMI.innerText = "BMI: " + bmi.toString();
 }  
-calculateBMI(this.Profile.weight, this.Profile.height);
+calculateBMI(80, 180);
