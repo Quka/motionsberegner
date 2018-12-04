@@ -155,9 +155,28 @@ namespace MotionsberegnerRestService.Controllers
 
         // PUT: api/Profile/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public int Put(int id, [FromBody] Profile p)
         {
-        }
+	        int resId = 0;
+	        string sql = "UPDATE Profil SET firstname = @firstName, lastname = @lastName, birthday = @birthday OUTPUT INSERTED.id WHERE id = @id";
+
+	        using (SqlConnection sqlConnection = new SqlConnection(conn))
+	        {
+		        sqlConnection.Open();
+		        using (SqlCommand updCommand = new SqlCommand(sql, sqlConnection))
+		        {
+			        updCommand.Parameters.AddWithValue("@id", id);
+			        updCommand.Parameters.AddWithValue("@firstName", p.FirstName);
+			        updCommand.Parameters.AddWithValue("@lastName", p.LastName);
+			        updCommand.Parameters.AddWithValue("@birthday", p.Birthday);
+
+			        // Update in DB and return updated id
+			        resId = (int)updCommand.ExecuteScalar();
+		        }
+	        }
+
+	        return resId;
+		}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
