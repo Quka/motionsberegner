@@ -38,7 +38,7 @@ namespace MotionsberegnerRestService.Controllers
             List<Profile> result = new List<Profile>();
 
             string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
-                         "INNER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
+                         "FULL OUTER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
             
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
