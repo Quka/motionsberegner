@@ -37,7 +37,7 @@ namespace MotionsberegnerRestService.Controllers
 
             List<Profile> result = new List<Profile>();
 
-            string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
+            string sql = "SELECT profil.id AS id, firstname, lastname, birthday, stepData.id AS stepid, steps, logDate FROM profil " +
                          "FULL OUTER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
             
 
@@ -66,9 +66,12 @@ namespace MotionsberegnerRestService.Controllers
                                     );
                                 }
 
-                                profile.Steps.Add(
-                                    new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
-                                );
+                                if (!reader.IsDBNull(4) && !reader.IsDBNull(5) && !reader.IsDBNull(6))
+                                {
+                                    profile.Steps.Add(
+                                        new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+                                    );
+                                }
                                 if (!result.Exists(p => p.ID == profile.ID))
                                 {
                                     result.Add(profile);
@@ -90,7 +93,7 @@ namespace MotionsberegnerRestService.Controllers
         {
             Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action
 
-            string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
+            string sql = "SELECT profil.id AS id, firstname, lastname, birthday, stepData.id AS stepid, steps, logDate FROM profil " +
                          "FULL OUTER JOIN stepData ON profil.id = stepData.profileId WHERE profil.id = " + ID; //SQL Command
 
             Profile profile = null;
@@ -116,10 +119,14 @@ namespace MotionsberegnerRestService.Controllers
                                         reader.GetDateTime(3)
                                     );
                                 }
-
-                                profile.Steps.Add(
-                                    new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
-                                );
+                                
+                                if (!reader.IsDBNull(4) && !reader.IsDBNull(5) && !reader.IsDBNull(6))
+                                {
+                                    profile.Steps.Add(
+                                        new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+                                    );
+                                }
+                                
                             }
                         }
                     }
