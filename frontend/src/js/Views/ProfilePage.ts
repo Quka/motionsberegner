@@ -1,5 +1,4 @@
 import axios, { AxiosResponse, AxiosError} from "../../../node_modules/axios/index";
-import { Profile } from "../Profile";
 import { IProfile } from "../IProfile";
 
 export class ProfilePage {
