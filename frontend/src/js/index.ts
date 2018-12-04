@@ -1,24 +1,56 @@
 import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index";
 import { IProfile } from "./IProfile";
+import { ProfilePage } from "./Views/ProfilePage";
 
+let pProfile: ProfilePage = new ProfilePage();
+
+// URL to our online webservice
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
 
+
+// Content is used to fill the html page
+let lastPage: string = "";
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 
-    //LOGIN PAGE
-let btn1: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton"); 
-btn1.addEventListener('click', removeToProfil);
+/**
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ * PROFILE PAGE EVENTS
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ */
+// When btn is pressed, call changepage function on index
+// which gets passed an html page, it then sets the new page
+let loginBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton");
+loginBtn.addEventListener('click', () => {
+    // Change the page
+    changePage(pProfile.getPage());
 
-    //OPRET PAGE
-let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton"); 
+    // Add eventlistenter to the added btn above
+    let editProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("editProfileBtn");
+    editProfileBtn.addEventListener('click', () => {
+        element.appendChild(pProfile.getEditProfileBox());
+
+        // Add eventlistenter to the added btn above
+        let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
+        saveProfileBtn.addEventListener('click', () => {
+            pProfile.updateProfile(uri, 1);
+        });
+    });
+});
+
+
+/**
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ * OPRET PROFILE PAGE EVENTS
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ */
+let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton"); // OPRET PAGE
 btn2.addEventListener('click', removeToOpret);
 
 //let backButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("backButton") //BACK TO HOMEPAGE
 //backButton.addEventListener('click', backToHomePage);
 
-/*****************************************************************************************************/
-
-    //GET PROFILE BY ID
+// Get profile by id button
+let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
 let btn3: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getButton");
 btn3.addEventListener('click', getProfileById);
 
@@ -28,11 +60,19 @@ btn3.addEventListener('click', getProfileById);
 // let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
 // btn4.addEventListener('click', getAllProfiles)
 
+// Create profile button
 //let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
-// let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
-// btn5.addEventListener('click', createProfile)
+let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
+btn5.addEventListener('click', createProfile);
 
-/*****************************************************************************************************/
+// Delete profile button
+let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
+btn6.addEventListener('click', deleteProfile);
+
+function changePage(htmlPage: string) {
+    var contentToChange = document.getElementById("content");
+    contentToChange.innerHTML = htmlPage;
+}
 
 function homepage(): void 
 {
@@ -94,8 +134,7 @@ function page2(): string {
     return html;
 }
 
-/*****************************************************************************************************/
-
+// Go to profile page
 function removeToProfil() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
@@ -174,8 +213,7 @@ function getProfileById(): void {
 
 // }
 
-/*****************************************************************************************************/
-
+// Create profile function
 function createProfile(): void {
         let firstName : HTMLInputElement = <HTMLInputElement> document.getElementById("firstName");
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
@@ -193,15 +231,20 @@ function createProfile(): void {
         .catch((error:AxiosError) => {
             console.log(error);
         })
-    }
-
-/*****************************************************************************************************/
-
+}
+    
+// Delete function
 function deleteProfile(): void {
-        let id : HTMLInputElement = document.getElementById("deleteId") as HTMLInputElement;
-        let result = uri + id.value;
-
+    let id : HTMLInputElement = document.getElementById("idToDelete") as HTMLInputElement;
+    let result = uri + id.value;
     axios.delete(result);
-    }
+}
 
-        
+// BMI calculator
+function calculateBMI(weight: number, height: number):void {   
+    const bmi = Math.round(weight / Math.pow((height/100), 2)); 
+ 
+    const BMI: HTMLDivElement = <HTMLDivElement> document.getElementById("bmi");
+    BMI.innerText = "BMI: " + bmi.toString();
+}  
+calculateBMI(80, 180);
