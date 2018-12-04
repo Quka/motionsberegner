@@ -1,15 +1,46 @@
 import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index";
 import { IProfile } from "./IProfile";
+import { ProfilePage } from "./Views/ProfilePage";
 
-let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile";
+let pProfile: ProfilePage = new ProfilePage();
+
+let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
 
 let lastPage = "";
 
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 
-let btn1: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton"); // LOGIN PAGE
-btn1.addEventListener('click', removeToProfil);
+/**
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ * PROFILE PAGE EVENTS
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ */
+// When btn is pressed, call changepage function on index
+// which gets passed an html page, it then sets the new page
+let loginBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton");
+loginBtn.addEventListener('click', () => {
+    // Change the page
+    changePage(pProfile.getPage());
 
+    // Add eventlistenter to the added btn above
+    let editProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("editProfileBtn");
+    editProfileBtn.addEventListener('click', () => {
+        element.appendChild(pProfile.getEditProfileBox());
+
+        // Add eventlistenter to the added btn above
+        let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
+        saveProfileBtn.addEventListener('click', () => {
+            pProfile.updateProfile(uri, 1);
+        });
+    });
+});
+
+
+/**
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ * OPRET PROFILE PAGE EVENTS
+ * = = = = = = = = = = = = = = = = = = = = = = = = 
+ */
 let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton"); // OPRET PAGE
 btn2.addEventListener('click', removeToOpret);
 
@@ -30,6 +61,10 @@ btn3.addEventListener('click', getProfileById)
 let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
 btn5.addEventListener('click', createProfile)
 
+function changePage(htmlPage: string) {
+    var contentToChange = document.getElementById("content");
+    contentToChange.innerHTML = htmlPage;
+}
 
 function homepage(): void 
 {

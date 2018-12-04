@@ -17,9 +17,3 @@ export class Profile {
         return this.name;
     }
 }
-
-export interface IProfile {
- firstName : string;
- lastName : string;
- birthday : Date;
- }
