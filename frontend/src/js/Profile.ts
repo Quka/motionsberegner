@@ -4,6 +4,7 @@ export class Profile {
     public get name() : string {
         return this._name;
     }
+
     public set name(v : string) {
         this._name = v;
     }
@@ -17,6 +18,8 @@ export class Profile {
     }
 }
 
-interface IProfile {
-    
-}
+export interface IProfile {
+ firstName : string;
+ lastName : string;
+ birthday : Date;
+ }
