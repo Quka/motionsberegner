@@ -38,7 +38,7 @@ namespace MotionsberegnerRestService.Controllers
             List<Profile> result = new List<Profile>();
 
             string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
-                         "INNER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
+                         "FULL OUTER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
             
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
@@ -91,7 +91,7 @@ namespace MotionsberegnerRestService.Controllers
             Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action
 
             string sql = "SELECT profil.id, firstname, lastname, birthday, stepData.id, steps, logDate FROM profil " +
-                         "INNER JOIN stepData ON profil.id = stepData.profileId WHERE profil.id = " + ID; //SQL Command
+                         "FULL OUTER JOIN stepData ON profil.id = stepData.profileId WHERE profil.id = " + ID; //SQL Command
 
             Profile profile = null;
 
