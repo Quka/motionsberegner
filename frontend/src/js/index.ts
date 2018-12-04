@@ -4,7 +4,9 @@ import { IProfile } from "./IProfile";
 // URL to our online webservice
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile";
 
+
 // Content is used to fill the html page
+let lastPage: string = "";
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 
 // Move to login page button
@@ -23,10 +25,10 @@ let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("Prof
 let btn3: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getButton");
 btn3.addEventListener('click', getProfileById)
 
-// Get all profiles button
-let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
-let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
-btn4.addEventListener('click', getAllProfiles)
+// // GET ALL PROFILES
+// let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
+// let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
+// btn4.addEventListener('click', getAllProfiles)
 
 // Create profile button
 //let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
@@ -37,14 +39,10 @@ btn5.addEventListener('click', createProfile)
 let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
 btn6.addEventListener('click', deleteProfile)
 
-let lastPage = "";
-
-//let resultOfNewProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("")
-
-// Main page
 function homepage(): void 
 {
     lastPage = "homepage";
+    
     //HOME PAGE
     "<input id=input placeholder='Indtast brugernavn her'><br>"
     "<input id=input placeholder='Indtast kodeord her'>"
@@ -52,10 +50,10 @@ function homepage(): void
     "<button id=opretButton>Opret profil</button>"
 }
 
-// Profile page
-function page1(): void {
-    lastPage = "page1";
+function profilePage(): string {
+    lastPage = "profilePage";
     let html = "";
+    
     html = "<h2>Profil</h2> ";
     html += "<h6>Brugeroplysninger</h6><br>";
     html += 
@@ -69,8 +67,7 @@ function page1(): void {
     // Indsæt database data her
     "<h7>Højde</h7><br><br>" + 
     // Indsæt database data her
-    "<h7>Antal skridt</h7><br><br>" +
-
+    "<h7>Antal skridt</h7><br><br>";
     "<button id='backButton'>Tilbage</button>"+
 
     "<div id='userResult'></div>";
@@ -79,10 +76,20 @@ function page1(): void {
         lastName : string;
         age : number; 
     }
+
+    // "<button id='backButton'>Tilbage</button>"+
+
+
+    // "<div id='userResult'></div>";
+    // interface IProfile {
+    //     firstName : string;
+    //     lastName : string;
+    //     age : number; 
+    // }
+    return html;
 }
 
-// Create new profile page
-function page2(): void {
+function page2(): string {
     lastPage = "page2";
     let html = "";
     html = "<h2>Opret profil</h2> ";
@@ -101,15 +108,14 @@ function page2(): void {
 
     "   <button id=opretButton>Gem og opret profil</button>";
     
-    element.innerHTML = html;
+    return html;
 }
 
 // Go to profile page
 function removeToProfil() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
-    element.innerHTML = "";
-    page1();
+    element.innerHTML = profilePage();
 }
 
 // Move to create profile function
@@ -125,7 +131,7 @@ function backToHomePage(): void {
     // Removes an element from the document
     //var element = document.getElementById("content");
     if(lastPage = "page1") {
-        page1();
+        profilePage();
     }
     else if(lastPage = "page2") {
         page2();
@@ -135,7 +141,20 @@ function backToHomePage(): void {
     }
 }
 
-// Get profile by id function
+// function backToHomePage(): void {
+//     // Removes an element from the document
+//     //var element = document.getElementById("content");
+//     if(lastPage = "profilePage") {
+//         profilePage();
+//     }
+//     else if(lastPage = "page2") {
+//         page2();
+//     }
+//     else if(lastPage = "homepage") {
+//         homepage();
+//     }
+// }
+    //GET ONE PROFILE
 function getProfileById(): void {
        let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
        let result  = uri + id.value;
@@ -147,23 +166,24 @@ function getProfileById(): void {
     })
 }
 
-// Get all profiles function
-function getAllProfiles():void {
-    let res: string = "<ul>";
+    //GET ALL PROFILES
+// function getAllProfiles():void {
+//     let res: string = "<ul>";
 
-    axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
-    {
-        response.data.forEach((profile : IProfile) => {
-            //console.log(profile);
-            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
-        });
-    })
-    .then(function(response)
-    {
-        res += "</ul>";
-        AllProfiles.innerHTML = res;
-    });
-}
+//     axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
+//     {
+//         response.data.forEach((profile : IProfile) => {
+//             //console.log(profile);
+//             res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
+//         });
+//     })
+//     .then(function(response)
+//     {
+//         res += "</ul>";
+//         AllProfiles.innerHTML = res;
+//     });
+
+// }
 
 // Create profile function
 function createProfile(): void {
