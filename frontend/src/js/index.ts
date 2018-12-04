@@ -42,8 +42,8 @@ function homepage(): void
     "<button id=opretButton>Opret profil</button>"
 }
 
-function page1(): string {
-    lastPage = "page1";
+function profilePage(): string {
+    lastPage = "profilePage";
     let html = "";
     
     html = "<h2>Profil</h2> ";
@@ -99,7 +99,7 @@ function page2(): string {
 function removeToProfil() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
-    element.innerHTML = page1();
+    element.innerHTML = profilePage();
 }
 
 function removeToOpret() : void {
@@ -109,19 +109,19 @@ function removeToOpret() : void {
     
 }
 
-function backToHomePage(): void {
-    // Removes an element from the document
-    //var element = document.getElementById("content");
-    if(lastPage = "page1") {
-        page1();
-    }
-    else if(lastPage = "page2") {
-        page2();
-    }
-    else if(lastPage = "homepage") {
-        homepage();
-    }
-}
+// function backToHomePage(): void {
+//     // Removes an element from the document
+//     //var element = document.getElementById("content");
+//     if(lastPage = "profilePage") {
+//         profilePage();
+//     }
+//     else if(lastPage = "page2") {
+//         page2();
+//     }
+//     else if(lastPage = "homepage") {
+//         homepage();
+//     }
+// }
     //GET ONE PROFILE
 function getProfileById(): void {
        let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
