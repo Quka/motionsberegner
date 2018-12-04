@@ -1,31 +1,36 @@
 import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index";
 import { IProfile } from "./IProfile";
 
-let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
+let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile";
 let lastPage = "";
 let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
 
-let btn1: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton");
-//btn1.addEventListener('click', removeToProfil);
+let btn1: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton"); // LOGIN PAGE
+btn1.addEventListener('click', removeToProfil);
 
-let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton");
-//btn2.addEventListener('click', removeToOpret);
+let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton"); // OPRET PAGE
+btn2.addEventListener('click', removeToOpret);
 
-let backButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("backButton")
+//let backButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("backButton") //BACK TO HOMEPAGE
 //backButton.addEventListener('click', backToHomePage);
 
-let resultOfProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("userResultById")
+// GET PROFILE BY ID
+let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
 let btn3: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getButton");
-//let idToGet: HTMLInputElement = <HTMLInputElement> document.getElementById("idToGet");
 btn3.addEventListener('click', getProfileById)
 
-let resultOfAllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("userResults")
+// GET ALL PROFILES
+let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
 let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
-//btn4.addEventListener('click', getAllProfiles)
+btn4.addEventListener('click', getAllProfiles)
 
-let resultOfNewProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("")
+//let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
+let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
+btn5.addEventListener('click', createProfile)
 
-let resultOfProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("userResult")
+
+//let resultOfNewProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("")
+
 
 
 function homepage(): void 
@@ -64,20 +69,8 @@ function page1(): void {
     interface IProfile {
         firstName : string;
         lastName : string;
-        age : number;
-        
-       }
-
-    function getProfile(): void {
-                let result  = uri 
-        axios.get<IProfile>(result)
-           .then(function(response){
-            resultOfProfile.innerHTML =  response.data.firstName + "   " + response.data.lastName + "   "  + response.data.age;
-          })
-        
-        }
-    getProfile();
-    element.innerHTML = html;  
+        age : number; 
+    }
 }
 
 function page2(): void {
@@ -101,8 +94,6 @@ function page2(): void {
     
     element.innerHTML = html;
 }
-
-
 
 function removeToProfil() : void {
     // Removes an element from the document
@@ -132,48 +123,60 @@ function backToHomePage(): void {
     }
 }
 
-
-function getAllProfiles():void {
-    axios.get<IProfile[]>(uri)
-    .then(function(response: AxiosResponse<IProfile[]>):void{
-        let result : string = "<ol>"
-        response.data.forEach((profile : IProfile) => {
-            console.log(profile);
-            
-            result += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>"});
-            result += "<ol>";
-
-            resultOfAllProfiles.innerHTML = result;
-    })
-}
-
-// getAllProfiles();
-
 function getProfileById(): void {
        let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
        let result  = uri + id.value;
-    axios.get<IProfile>(result)
-       .then(function(response){
-           console.log(response);
-        //resultOfProfileById.innerHTML =  response.data.firstName + "   " + response.data.lastName + "   "  + response.data.birthday;
-      })
-    
+        
+       axios.get<IProfile>(result).then(function(response)
+    {
+        console.log(response);
+        ProfileById.innerHTML =  response.data.firstName + "   " + response.data.lastName + "   "  + response.data.birthday;
+    })
+}
+
+function getAllProfiles():void {
+    let res: string = "<ul>";
+
+    axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
+    {
+        response.data.forEach((profile : IProfile) => {
+            //console.log(profile);
+            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
+        });
+    })
+    .then(function(response)
+    {
+        res += "</ul>";
+        AllProfiles.innerHTML = res;
+    });
+
+}
+
+function createProfile(): void {
+        let firstName : HTMLInputElement = <HTMLInputElement> document.getElementById("firstName");
+        let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
+        let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
+
+        let myFirstname:string = firstName.value;
+        let myLastame:string = lastName.value;
+        let myBirthday:Number = Number (birthday.value);
+        //let result : IProfile = {firstName: firstName.value , lastName : lastName.value, birthday : birthday.valueAsDate};
+        
+        axios.post<IProfile[]> (uri, {firstname:myFirstname, lastname:myLastame, birthDay:myBirthday})
+        .then((Response:AxiosResponse) => {
+            console.log(Response);
+        })
+        .catch((error:AxiosError) => {
+            console.log(error);
+        })
     }
 
-
-function createNewProfile(): void {
-        let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
-        let lastName : HTMLInputElement = document.getElementById("lastName") as HTMLInputElement;
-        let birthday : HTMLInputElement = document.getElementById("birthday") as HTMLInputElement;
-        let result : IProfile = {firstName: firstName.value , lastName : lastName.value, birthday : birthday.valueAsDate};
-        
-        axios.post<IProfile>(uri, result)
-        }
-
     
-function deleteProfile(): void {
-        let id : HTMLInputElement = document.getElementById("deleteId") as HTMLInputElement;
-        let result = uri + id.value;
+// function deleteProfile(): void {
+//         let id : HTMLInputElement = document.getElementById("deleteId") as HTMLInputElement;
+//         let result = uri + id.value;
 
-    axios.delete(result);
-    }        
+//     axios.delete(result);
+//     }
+
+        
