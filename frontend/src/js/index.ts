@@ -143,11 +143,7 @@ function opretProfilPage(): string {
     "<h7>Højde</h7><br>" + 
         "<input id=input placeholder='Indtast højde her'><br><br>"+
 
-<<<<<<< HEAD
-    "<button id=opretButton> Gem og opret profil </button>";
-=======
     "<button id=opretButton>Gem og opret profil</button>";
->>>>>>> c5541a2537d06ea8a7ecf138b8bba27242417a40
     
     return html;
 }
@@ -196,11 +192,6 @@ function getProfileById(): void {
         //Removes an element from the document
         var element = document.getElementById("content");
         element.innerHTML = profilePage();
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> c5541a2537d06ea8a7ecf138b8bba27242417a40
         let ProfileFName = document.getElementById("name"); 
         ProfileFName.innerHTML = response.data.firstName;
 
@@ -262,7 +253,7 @@ function createProfile(): void {
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
         let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
         let weight : HTMLInputElement = <HTMLInputElement> document.getElementById("weight")
-        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("Højde")
+        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("højde")
 
         let myFirstname:string = firstName.value;
         let myLastame:string = lastName.value;
