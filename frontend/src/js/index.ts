@@ -74,7 +74,7 @@ btn4.addEventListener('click', getAllProfiles)
 
 // Create profile button
 //let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
-let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
+let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("opretProfileButton")
 btn5.addEventListener('click', createProfile);
 
 // Delete profile button
@@ -132,18 +132,18 @@ function opretProfilPage(): string {
     html = "<h2>Opret profil</h2> ";
     html += "<h6>Brugeroplysninger</h6><br>";
     html += 
-    "<h7>Navn</h7><br>" + 
-        "<input id=opret placeholder='Indtast fornavn her'><br><br>" +
+    "<h7>Foravn</h7><br>" + 
+        "<input id='firstName' placeholder='Indtast fornavn her'><br><br>" +
     "<h7>Efternavn</h7><br>" + 
-        "<input id=input placeholder='Indtast efternavn her'><br><br>" +
+        "<input id='lastName' placeholder='Indtast efternavn her'><br><br>" +
     "<h7>Fødselsdato</h7><br>" + 
-        "<input id=input placeholder='Indtast fødselsdato her'><br><br>" +
+        "<input id='birthday' placeholder='Indtast fødselsdato her'><br><br>" +
     "<h7>Vægt</h7><br>" + 
-        "<input id=input placeholder='Indtast vægt her'><br><br>" +
+        "<input id='weight' placeholder='Indtast vægt her'><br><br>" +
     "<h7>Højde</h7><br>" + 
-        "<input id=input placeholder='Indtast højde her'><br><br>"+
+        "<input id='height' placeholder='Indtast højde her'><br><br>"+
 
-    "<button id=opretButton>Gem og opret profil</button>";
+    "<button id='opretProfileButton'>Gem og opret profil</button>";
     
     return html;
 }
@@ -253,7 +253,7 @@ function createProfile(): void {
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
         let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
         let weight : HTMLInputElement = <HTMLInputElement> document.getElementById("weight")
-        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("højde")
+        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("height")
 
         let myFirstname:string = firstName.value;
         let myLastame:string = lastName.value;
