@@ -5,7 +5,7 @@ export interface IProfile {
     firstName : string;
     lastName : string;
     birthday : Date;
-    steps : IStep[];
-    height: number;
+    steps : IStep[];    
     weight: number;
+    height: number;
 }

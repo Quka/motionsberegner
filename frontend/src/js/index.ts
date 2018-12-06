@@ -32,6 +32,7 @@ loginBtn.addEventListener('click', () => {
     let loginUsername: string = (<HTMLInputElement>document.getElementById("loginUsername")).value;
     let loginPassword: string = (<HTMLInputElement>document.getElementById("loginPassword")).value;
     
+<<<<<<< HEAD
     login.Authenticate(uri, loginUsername, loginPassword)
     .then((response) => {
         if(response) {
@@ -48,6 +49,23 @@ loginBtn.addEventListener('click', () => {
     })
     .catch((error) => {
         console.log(error);
+=======
+    login.Authenticate(uri, loginUsername, loginPassword);
+
+    // Change the page
+    changePage(pProfile.getPage());
+
+    // Add eventlistenter to the added btn above
+    let editProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("editProfileBtn");
+    editProfileBtn.addEventListener('click', () => {
+        element.appendChild(pProfile.getEditProfileBox());
+
+        // Add eventlistenter to the added btn above
+        let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
+        saveProfileBtn.addEventListener('click', () => {
+            pProfile.updateProfile(uri, 1);
+        });
+>>>>>>> d799f3e387b1b32ca64b64a92aa47136afb903d8
     });
 });
 
@@ -70,13 +88,13 @@ btn3.addEventListener('click', getProfileById);
 
 /*****************************************************************************************************/
     //GET ALL PROFILES
-// let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
-// let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
-// btn4.addEventListener('click', getAllProfiles)
+let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
+let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
+btn4.addEventListener('click', getAllProfiles)
 
 // Create profile button
 //let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
-let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
+let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("opretProfileButton")
 btn5.addEventListener('click', createProfile);
 
 // Delete profile button
@@ -115,9 +133,11 @@ function profilePage(): string {
         "<div id='birthday'></div><br>" +
 
     "<h7>Vægt</h7><br><br>" + 
+    "<div id='weight'></div><br>" +
     // Indsæt database data her
 
     "<h7>Højde</h7><br><br>" + 
+    "<div id='height'></div><br>" +
     // Indsæt database data her
 
     "<h7>Antal skridt</h7><br><br>";
@@ -127,23 +147,23 @@ function profilePage(): string {
 
 /*****************************************************************************************************/
 
-function page2(): string {
+function opretProfilPage(): string {
     let html = "";
     html = "<h2>Opret profil</h2> ";
     html += "<h6>Brugeroplysninger</h6><br>";
     html += 
-    "<h7>Navn</h7><br>" + 
-    "<input id=input placeholder='Indtast fornavn her'><br><br>" +
+    "<h7>Foravn</h7><br>" + 
+        "<input id='firstName' placeholder='Indtast fornavn her'><br><br>" +
     "<h7>Efternavn</h7><br>" + 
-    "<input id=input placeholder='Indtast efternavn her'><br><br>" +
+        "<input id='lastName' placeholder='Indtast efternavn her'><br><br>" +
     "<h7>Fødselsdato</h7><br>" + 
-    "<input id=input placeholder='Indtast fødselsdato her'><br><br>" +
+        "<input id='birthday' placeholder='Indtast fødselsdato her'><br><br>" +
     "<h7>Vægt</h7><br>" + 
-    "<input id=input placeholder='Indtast vægt her'><br><br>" +
+        "<input id='weight' placeholder='Indtast vægt her'><br><br>" +
     "<h7>Højde</h7><br>" + 
-    "<input id=input placeholder='Indtast højde her'><br><br>"+
+        "<input id='height' placeholder='Indtast højde her'><br><br>"+
 
-    "   <button id=opretButton>Gem og opret profil</button>";
+    "<button id='opretProfileButton'>Gem og opret profil</button>";
     
     return html;
 }
@@ -160,7 +180,7 @@ function removeToProfil() : void {
 function removeToOpret() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
-    element.innerHTML = page2();
+    element.innerHTML = opretProfilPage();
 }
 
 /*****************************************************************************************************/
@@ -172,8 +192,8 @@ function removeToOpret() : void {
 //     if(lastPage = "profilePage") {
 //         profilePage();
 //     }
-//     else if(lastPage = "page2") {
-//         page2();
+//     else if(lastPage = "opretProfilPage") {
+//         opretProfilPage();
 //     }
 //     else if(lastPage = "homepage") {
 //         homepage();
@@ -206,6 +226,8 @@ function getProfileById(): void {
 
         let ProfileHeight = document.getElementById("height");
         ProfileHeight.innerHTML = String (response.data.height);
+
+       
         
         // response.data.steps.forEach( steps => {
         //     html += steps.steps 
@@ -214,13 +236,13 @@ function getProfileById(): void {
     })
 }
 
-// getAllProfiles();
-
 /*
 function createNewProfile(): void {
         let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
         let lastName : HTMLInputElement = document.getElementById("lastName") as HTMLInputElement;
         let birthday : HTMLInputElement = document.getElementById("birthday") as HTMLInputElement;
+        let weight : HTMLInputElement = document.getElementById("weight") as HTMLInputElement;
+        let height : HTMLInputElement = document.getElementById("height") as HTMLInputElement;
         let result : IProfile;
     
 }
@@ -228,23 +250,22 @@ function createNewProfile(): void {
 /*****************************************************************************************************/
 
     /*GET ALL PROFILES*/
-// function getAllProfiles():void {
-//     let res: string = "<ul>";
+function getAllProfiles():void {
+    let res: string = "<ul>";
 
-//     axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
-//     {
-//         response.data.forEach((profile : IProfile) => {
-//             //console.log(profile);
-//             res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
-//         });
-//     })
-//     .then(function(response)
-//     {
-//         res += "</ul>";
-//         AllProfiles.innerHTML = res;
-//     });
-
-// }
+    axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
+    {
+        response.data.forEach((profile : IProfile) => {
+            //console.log(profile);
+            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + " " + "Weight:" + " " + profile.weight + " " + "Height:" + " " + profile.height + "</li>";
+        });
+    })
+    .then(function(response)
+    {
+        res += "</ul>";
+        AllProfiles.innerHTML = res;
+    });
+}
 
 // Create profile function
 function createProfile(): void {
@@ -252,7 +273,7 @@ function createProfile(): void {
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
         let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
         let weight : HTMLInputElement = <HTMLInputElement> document.getElementById("weight")
-        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("Højde")
+        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("height")
 
         let myFirstname:string = firstName.value;
         let myLastame:string = lastName.value;
