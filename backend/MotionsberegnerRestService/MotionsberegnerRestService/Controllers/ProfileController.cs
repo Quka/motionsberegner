@@ -37,7 +37,7 @@ namespace MotionsberegnerRestService.Controllers
 
             List<Profile> result = new List<Profile>();
 
-            string sql = "SELECT profil.id AS id, firstname, lastname, birthday, stepData.id AS stepid, steps, logDate FROM profil " +
+            string sql = "SELECT profil.id AS id, firstname, lastname, birthday, weight, height, stepData.id AS stepid, steps, logDate FROM profil " +
                          "FULL OUTER JOIN stepData ON profil.id = stepData.profileId"; //SQL Command
             
 
@@ -62,14 +62,16 @@ namespace MotionsberegnerRestService.Controllers
                                         reader.GetInt32(0),
                                         reader.GetString(1),
                                         reader.GetString(2),
-                                        reader.GetDateTime(3)
+                                        reader.GetDateTime(3),
+                                        reader.GetInt32(4),
+                                        reader.GetInt32(5)
                                     );
                                 }
 
-                                if (!reader.IsDBNull(4) && !reader.IsDBNull(5) && !reader.IsDBNull(6))
+                                if (!reader.IsDBNull(6) && !reader.IsDBNull(7) && !reader.IsDBNull(8))
                                 {
                                     profile.Steps.Add(
-                                        new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+                                        new StepData(reader.GetInt32(6), profile.ID, reader.GetInt32(7), reader.GetDateTime(8))
                                     );
                                 }
                                 if (!result.Exists(p => p.ID == profile.ID))
@@ -93,7 +95,7 @@ namespace MotionsberegnerRestService.Controllers
         {
             Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action
 
-            string sql = "SELECT profil.id AS id, firstname, lastname, birthday, stepData.id AS stepid, steps, logDate FROM profil " +
+            string sql = "SELECT profil.id AS id, firstname, lastname, birthday, weight, height, stepData.id AS stepid, steps, logDate FROM profil " +
                          "FULL OUTER JOIN stepData ON profil.id = stepData.profileId WHERE profil.id = " + ID; //SQL Command
 
             Profile profile = null;
@@ -116,11 +118,13 @@ namespace MotionsberegnerRestService.Controllers
                                         reader.GetInt32(0),
                                         reader.GetString(1),
                                         reader.GetString(2),
-                                        reader.GetDateTime(3)
+                                        reader.GetDateTime(3),
+                                        reader.GetInt32(4),
+                                        reader.GetInt32(5)
                                     );
                                 }
                                 
-                                if (!reader.IsDBNull(4) && !reader.IsDBNull(5) && !reader.IsDBNull(6))
+                                if (!reader.IsDBNull(6) && !reader.IsDBNull(7) && !reader.IsDBNull(8))
                                 {
                                     profile.Steps.Add(
                                         new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
