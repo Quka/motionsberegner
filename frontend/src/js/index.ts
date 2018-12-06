@@ -201,6 +201,12 @@ function getProfileById(): void {
 
         let ProfileBday = document.getElementById("birthday"); 
         ProfileBday.innerHTML = String (response.data.birthday);
+
+        let ProfileWeight = document.getElementById("weight");
+        ProfileWeight.innerHTML = String (response.data.weight);
+
+        let ProfileHeight = document.getElementById("height");
+        ProfileHeight.innerHTML = String (response.data.height);
         
         // response.data.steps.forEach( steps => {
         //     html += steps.steps 
@@ -246,13 +252,19 @@ function createProfile(): void {
         let firstName : HTMLInputElement = <HTMLInputElement> document.getElementById("firstName");
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
         let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
+        let weight : HTMLInputElement = <HTMLInputElement> document.getElementById("weight")
+        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("Højde")
 
         let myFirstname:string = firstName.value;
         let myLastame:string = lastName.value;
         let myBirthday:Number = Number (birthday.value);
+        let myWeight:Number = Number (weight.value);
+        let myHeight:Number = Number (height.value);
+
+
         //let result : IProfile = {firstName: firstName.value , lastName : lastName.value, birthday : birthday.valueAsDate};
         
-        axios.post<IProfile[]> (uri, {firstname:myFirstname, lastname:myLastame, birthDay:myBirthday})
+        axios.post<IProfile[]> (uri, {firstname:myFirstname, lastname:myLastame, birthDay:myBirthday, weight:myWeight, height:myHeight})
         .then((Response:AxiosResponse) => {
             console.log(Response);
         })
