@@ -3,13 +3,15 @@ import { IProfile } from "./IProfile";
 
 export class Login {
     
-    private _Profile : IProfile;
-    public get Profile() : IProfile {
-        return this._Profile;
+    
+    private _lastLogin : IProfile;
+    public get lastLogin() : IProfile {
+        return this._lastLogin;
     }
-    public set Profile(v : IProfile) {
-        this._Profile = v;
+    public set lastLogin(v : IProfile) {
+        this._lastLogin = v;
     }
+    
     
     /**
      *
@@ -18,15 +20,19 @@ export class Login {
         
     }
 
-    Authenticate(username: string, password: string): boolean {
-        
+    Authenticate(uri: string, username: string, password: string): boolean {
+        this.loadProfile(uri, username);
+
+
 
         return false;
     }
 
-    loadProfile(): void {
-        axios.get<IProfile>(result).then(function(response) {
-            
+    private loadProfile(uri: string, name: string): void {
+        axios.get<IProfile>(uri + "/username/" + name)
+        .then(function(response) {
+            console.log(response);
+            this.lastLogin = response.data;
         });
     }
 }
