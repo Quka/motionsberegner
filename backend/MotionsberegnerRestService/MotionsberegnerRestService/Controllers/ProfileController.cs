@@ -145,7 +145,7 @@ namespace MotionsberegnerRestService.Controllers
 		{
 			Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action
 
-			string sql = "SELECT profil.id AS id, firstname, lastname, birthday, stepData.id AS stepid, steps, logDate FROM profil " +
+			string sql = "SELECT profil.id AS id, firstname, lastname, birthday, weight, height, stepData.id AS stepid, steps, logDate FROM profil " +
 						 "FULL OUTER JOIN stepData ON profil.id = stepData.profileId WHERE profil.firstname = '" + name + "'"; //SQL Command
 
 			Profile profile = null;
@@ -168,11 +168,13 @@ namespace MotionsberegnerRestService.Controllers
 										reader.GetInt32(0),
 										reader.GetString(1),
 										reader.GetString(2),
-										reader.GetDateTime(3)
+										reader.GetDateTime(3),
+                                        reader.GetInt32(4),
+                                        reader.GetInt32(5)
 									);
 								}
 
-								if (!reader.IsDBNull(4) && !reader.IsDBNull(5) && !reader.IsDBNull(6))
+								if (!reader.IsDBNull(6) && !reader.IsDBNull(7) && !reader.IsDBNull(8))
 								{
 									profile.Steps.Add(
 										new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
@@ -204,7 +206,9 @@ namespace MotionsberegnerRestService.Controllers
                     cmd.Parameters.AddWithValue("@firstname", profile.FirstName); //@firstName er placeholder og bliver erstattet af 'customer.FirstName'
                     cmd.Parameters.AddWithValue("@lastname", profile.LastName);
                     cmd.Parameters.AddWithValue("@birthday", profile.Birthday);
-
+                    cmd.Parameters.AddWithValue("@weight", profile.Weight);
+                    cmd.Parameters.AddWithValue("@height", profile.Height);
+                   
                     insId = (int)cmd.ExecuteScalar(); //Tager kolonnen som bliver returneret i SQL Command (OUTPUT INSERTED.id) og indsætter som 'insId'
                 }
             }
@@ -228,6 +232,8 @@ namespace MotionsberegnerRestService.Controllers
 			        updCommand.Parameters.AddWithValue("@firstName", p.FirstName);
 			        updCommand.Parameters.AddWithValue("@lastName", p.LastName);
 			        updCommand.Parameters.AddWithValue("@birthday", p.Birthday);
+                    updCommand.Parameters.AddWithValue("@weight", p.Weight);
+		            updCommand.Parameters.AddWithValue("@height", p.Height);
 
 			        // Update in DB and return updated id
 			        resId = (int)updCommand.ExecuteScalar();
