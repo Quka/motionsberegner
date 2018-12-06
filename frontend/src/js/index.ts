@@ -21,6 +21,9 @@ let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content")
 // which gets passed an html page, it then sets the new page
 let loginBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton");
 loginBtn.addEventListener('click', () => {
+    
+
+
     // Change the page
     changePage(pProfile.getPage());
 
