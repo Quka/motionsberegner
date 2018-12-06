@@ -32,9 +32,6 @@ loginBtn.addEventListener('click', () => {
     let loginPassword: string = (<HTMLInputElement>document.getElementById("loginPassword")).value;
     
     login.Authenticate(uri, loginUsername, loginPassword);
-    
-    
-    
 
     // Change the page
     changePage(pProfile.getPage());
@@ -71,9 +68,9 @@ btn3.addEventListener('click', getProfileById);
 
 /*****************************************************************************************************/
     //GET ALL PROFILES
-// let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
-// let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
-// btn4.addEventListener('click', getAllProfiles)
+let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
+let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
+btn4.addEventListener('click', getAllProfiles)
 
 // Create profile button
 //let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
@@ -215,8 +212,6 @@ function getProfileById(): void {
     })
 }
 
-// getAllProfiles();
-
 /*
 function createNewProfile(): void {
         let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
@@ -229,23 +224,23 @@ function createNewProfile(): void {
 /*****************************************************************************************************/
 
     /*GET ALL PROFILES*/
-// function getAllProfiles():void {
-//     let res: string = "<ul>";
+function getAllProfiles():void {
+    let res: string = "<ul>";
 
-//     axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
-//     {
-//         response.data.forEach((profile : IProfile) => {
-//             //console.log(profile);
-//             res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
-//         });
-//     })
-//     .then(function(response)
-//     {
-//         res += "</ul>";
-//         AllProfiles.innerHTML = res;
-//     });
+    axios.get<IProfile[]>(uri).then(function(response: AxiosResponse<IProfile[]>):void
+    {
+        response.data.forEach((profile : IProfile) => {
+            //console.log(profile);
+            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
+        });
+    })
+    .then(function(response)
+    {
+        res += "</ul>";
+        AllProfiles.innerHTML = res;
+    });
 
-// }
+}
 
 // Create profile function
 function createProfile(): void {

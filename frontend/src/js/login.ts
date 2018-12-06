@@ -23,8 +23,6 @@ export class Login {
     Authenticate(uri: string, username: string, password: string): boolean {
         this.loadProfile(uri, username);
 
-
-
         return false;
     }
 
