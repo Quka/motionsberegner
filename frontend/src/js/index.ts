@@ -125,23 +125,23 @@ function profilePage(): string {
 
 /*****************************************************************************************************/
 
-function page2(): string {
+function opretProfilPage(): string {
     let html = "";
     html = "<h2>Opret profil</h2> ";
     html += "<h6>Brugeroplysninger</h6><br>";
     html += 
     "<h7>Navn</h7><br>" + 
-    "<input id=input placeholder='Indtast fornavn her'><br><br>" +
+        "<input id=opret placeholder='Indtast fornavn her'><br><br>" +
     "<h7>Efternavn</h7><br>" + 
-    "<input id=input placeholder='Indtast efternavn her'><br><br>" +
+        "<input id=input placeholder='Indtast efternavn her'><br><br>" +
     "<h7>Fødselsdato</h7><br>" + 
-    "<input id=input placeholder='Indtast fødselsdato her'><br><br>" +
+        "<input id=input placeholder='Indtast fødselsdato her'><br><br>" +
     "<h7>Vægt</h7><br>" + 
-    "<input id=input placeholder='Indtast vægt her'><br><br>" +
+        "<input id=input placeholder='Indtast vægt her'><br><br>" +
     "<h7>Højde</h7><br>" + 
-    "<input id=input placeholder='Indtast højde her'><br><br>"+
+        "<input id=input placeholder='Indtast højde her'><br><br>"+
 
-    "   <button id=opretButton>Gem og opret profil</button>";
+    "<button id=opretButton> Gem og opret profil </button>";
     
     return html;
 }
@@ -158,7 +158,7 @@ function removeToProfil() : void {
 function removeToOpret() : void {
     // Removes an element from the document
     var element = document.getElementById("content");
-    element.innerHTML = page2();
+    element.innerHTML = opretProfilPage();
 }
 
 /*****************************************************************************************************/
@@ -170,8 +170,8 @@ function removeToOpret() : void {
 //     if(lastPage = "profilePage") {
 //         profilePage();
 //     }
-//     else if(lastPage = "page2") {
-//         page2();
+//     else if(lastPage = "opretProfilPage") {
+//         opretProfilPage();
 //     }
 //     else if(lastPage = "homepage") {
 //         homepage();
@@ -190,6 +190,7 @@ function getProfileById(): void {
         //Removes an element from the document
         var element = document.getElementById("content");
         element.innerHTML = profilePage();
+        
         let ProfileFName = document.getElementById("name"); 
         ProfileFName.innerHTML = response.data.firstName;
 
@@ -239,7 +240,6 @@ function getAllProfiles():void {
         res += "</ul>";
         AllProfiles.innerHTML = res;
     });
-
 }
 
 // Create profile function
