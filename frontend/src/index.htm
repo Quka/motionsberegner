@@ -7,43 +7,51 @@
 </head>
 
 <body>
-
   <div class="container-fluid wrapper">
     <div class="row">
       <div class="col">
-        <h1 class="rainbow">Run'n Fun</h1><br>     
+        <h1 id="title", class="rainbow">Run'n Fun</h1><br>     
         <div id="content">
-
           <!-- Home page -->
           <input id="input" placeholder="Indtast brugernavn her"><br> 
           <input id="input" placeholder="Indtast kodeord her"><br><br>  
 
+          <!-- Login button -->
           <button id="loginButton">Login</button>
+
+          <!-- Create profile button -->
           <button id="opretButton">Opret profil</button> -->
+          <!-- <button id="createButton"></button>
+          <input type="input"> -->
 
-
-          <input type="input" id="idToGet" placeholder="id som du vil get fra">
-          <button id="getButton">getProfile</button>
+          <!-- Get profile by id -->
           <div id="ProfileById"></div>
+          <input type="input" id="idToGet" placeholder="indtast id">
+          <button id="getButton">getProfile</button>
 
-          <button id="getAllButton">getAllProfiles</button>
-          <div id="AllProfiles"></div><br>
+          <!-- <button id="getAllButton">getAllProfiles</button>
+          <div id="AllProfiles"></div><br> -->
 
+          <!-- Create profile -->
           <div>Create profile</div><br>
           <input type="input" id="firstName" placeholder="firstname">
           <input type="input" id="lastName" placeholder="lastname">
           <input type="input" id="birthday" placeholder="birthday">
           <button id="CreateProfileButton">Create</button>
+          <div id="space">  </div>
 
-          <!-- <button id="createButton"></button>
-          <input type="input"> -->
+          <!-- BMI -->
+          <div id="bmi">BMI: </div>
 
-        </div>
-               
+          <!-- Delete profile -->
+          <button id="deleteButton"> Slet profil</button>
+          <input type="text" id="idToDelete"  placeholder="id på den profil du vil slette">
+
+          </div>
       </div>
     </div>
   </div>
 
 <script src="bundle.js"></script>
 </body>
-</html>
+</html> 
