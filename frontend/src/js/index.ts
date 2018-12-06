@@ -190,8 +190,21 @@ function getProfileById(): void {
         let ProfileBday = document.getElementById("birthday"); 
         ProfileBday.innerHTML = String (response.data.birthday);
         
+        // response.data.steps.forEach( steps => {
+        //     html += steps.steps 
+        // });
     
     })
+}
+
+// getAllProfiles();
+
+/*
+function createNewProfile(): void {
+        let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
+        let lastName : HTMLInputElement = document.getElementById("lastName") as HTMLInputElement;
+        let birthday : HTMLInputElement = document.getElementById("birthday") as HTMLInputElement;
+        let result : IProfile;
     
 }
 
