@@ -143,7 +143,7 @@ function page2(): string {
     "<h7>Højde</h7><br>" + 
     "<input id=input placeholder='Indtast højde her'><br><br>"+
 
-    "   <button id=opretButton>Gem og opret profil</button>";
+    "<button id=opretButton>Gem og opret profil</button>";
     
     return html;
 }
@@ -207,6 +207,8 @@ function getProfileById(): void {
 
         let ProfileHeight = document.getElementById("height");
         ProfileHeight.innerHTML = String (response.data.height);
+
+       
         
         // response.data.steps.forEach( steps => {
         //     html += steps.steps 
