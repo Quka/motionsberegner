@@ -135,8 +135,56 @@ namespace MotionsberegnerRestService.Controllers
             return profile;
         }
 
-        // POST: api/Profile
-        [HttpPost]
+		// GET: api/Profile/username/name
+		[HttpGet("username/{name}", Name = "GetProfileByName")]
+		public Profile GetOneProfileByName(string name)
+		{
+			Response.StatusCode = (int)HttpStatusCode.OK; //200  The message for the HttpResponse action
+
+			string sql = "SELECT profil.id AS id, firstname, lastname, birthday, stepData.id AS stepid, steps, logDate FROM profil " +
+						 "FULL OUTER JOIN stepData ON profil.id = stepData.profileId WHERE profil.firstname = '" + name + "'"; //SQL Command
+
+			Profile profile = null;
+
+			using (SqlConnection databaseConnection = new SqlConnection(conn))
+			{
+				databaseConnection.Open();
+
+				using (SqlCommand selectCommand = new SqlCommand(sql, databaseConnection))
+				{
+					using (SqlDataReader reader = selectCommand.ExecuteReader())
+					{
+						if (reader.HasRows)
+						{
+							while (reader.Read())
+							{
+								if (profile == null)
+								{
+									profile = new Profile(
+										reader.GetInt32(0),
+										reader.GetString(1),
+										reader.GetString(2),
+										reader.GetDateTime(3)
+									);
+								}
+
+								if (!reader.IsDBNull(4) && !reader.IsDBNull(5) && !reader.IsDBNull(6))
+								{
+									profile.Steps.Add(
+										new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+									);
+								}
+
+							}
+						}
+					}
+				}
+			}
+			return profile;
+		}
+
+		// POST: api/Profile
+		[HttpPost]
         public int InsertProfile([FromBody] Profile profile)
         {
             int insId = 0;
