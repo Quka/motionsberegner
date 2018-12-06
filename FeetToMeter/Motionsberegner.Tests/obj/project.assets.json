@@ -1615,6 +1615,9 @@
       "MotionsberegnerApp/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Microsoft.NETCore.App": "2.0.0"
+        },
         "compile": {
           "bin/placeholder/MotionsberegnerApp.dll": {}
         },
@@ -5710,23 +5713,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\afg_k\\.nuget\\packages\\": {},
+    "C:\\Users\\soeren\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\afg_k\\source\\repos\\FeetToMeter\\Motionsberegner.Tests\\Motionsberegner.Tests.csproj",
+      "projectUniqueName": "C:\\source\\Important tasks\\3.sem Project\\motionsberegner\\FeetToMeter\\Motionsberegner.Tests\\Motionsberegner.Tests.csproj",
       "projectName": "Motionsberegner.Tests",
-      "projectPath": "C:\\Users\\afg_k\\source\\repos\\FeetToMeter\\Motionsberegner.Tests\\Motionsberegner.Tests.csproj",
-      "packagesPath": "C:\\Users\\afg_k\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\afg_k\\source\\repos\\FeetToMeter\\Motionsberegner.Tests\\obj\\",
+      "projectPath": "C:\\source\\Important tasks\\3.sem Project\\motionsberegner\\FeetToMeter\\Motionsberegner.Tests\\Motionsberegner.Tests.csproj",
+      "packagesPath": "C:\\Users\\soeren\\.nuget\\packages\\",
+      "outputPath": "C:\\source\\Important tasks\\3.sem Project\\motionsberegner\\FeetToMeter\\Motionsberegner.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\afg_k\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\soeren\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5739,8 +5742,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\afg_k\\source\\repos\\FeetToMeter\\FeetToMeter\\MotionsberegnerApp.csproj": {
-              "projectPath": "C:\\Users\\afg_k\\source\\repos\\FeetToMeter\\FeetToMeter\\MotionsberegnerApp.csproj"
+            "C:\\source\\Important tasks\\3.sem Project\\motionsberegner\\FeetToMeter\\FeetToMeter\\MotionsberegnerApp.csproj": {
+              "projectPath": "C:\\source\\Important tasks\\3.sem Project\\motionsberegner\\FeetToMeter\\FeetToMeter\\MotionsberegnerApp.csproj"
             }
           }
         }
@@ -5767,7 +5770,6 @@
             "version": "[15.7.0, )"
           },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true
