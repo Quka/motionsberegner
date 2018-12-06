@@ -3,17 +3,18 @@ import { IProfile } from "./IProfile";
 import { Login } from "./Login";
 import { ProfilePage } from "./Views/ProfilePage";
 
-let login: Login = new Login();
-let pProfile: ProfilePage = new ProfilePage();
-let userProfile: IProfile;
 
 // URL to our online webservice
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
 
+let login: Login = new Login();
+let pProfile: ProfilePage = new ProfilePage();
+
+
 
 // Content is used to fill the html page
 let lastPage: string = "";
-let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content");
+let element: HTMLElement = document.getElementById("content") as HTMLElement;
 
 /**
  * = = = = = = = = = = = = = = = = = = = = = = = = 
@@ -31,24 +32,22 @@ loginBtn.addEventListener('click', () => {
     let loginUsername: string = (<HTMLInputElement>document.getElementById("loginUsername")).value;
     let loginPassword: string = (<HTMLInputElement>document.getElementById("loginPassword")).value;
     
-    login.Authenticate(uri, loginUsername, loginPassword);
-    
-    
-    
-
-    // Change the page
-    changePage(pProfile.getPage());
-
-    // Add eventlistenter to the added btn above
-    let editProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("editProfileBtn");
-    editProfileBtn.addEventListener('click', () => {
-        element.appendChild(pProfile.getEditProfileBox());
-
-        // Add eventlistenter to the added btn above
-        let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
-        saveProfileBtn.addEventListener('click', () => {
-            pProfile.updateProfile(uri, 1);
-        });
+    login.Authenticate(uri, loginUsername, loginPassword)
+    .then((response) => {
+        if(response) {
+            changePage(
+                pProfile.getPage( element )
+            );
+        }
+        else {
+            let errDiv: HTMLDivElement = <HTMLDivElement> document.createElement("div");
+            errDiv.innerHTML = "Error: Couldn't log in";
+            errDiv.className = "error-popup";
+            element.appendChild(errDiv);
+        }
+    })
+    .catch((error) => {
+        console.log(error);
     });
 });
 
@@ -84,9 +83,9 @@ btn5.addEventListener('click', createProfile);
 let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
 btn6.addEventListener('click', deleteProfile);
 
-function changePage(htmlPage: string) {
+function changePage(htmlPage: HTMLElement) {
     var contentToChange = document.getElementById("content");
-    contentToChange.innerHTML = htmlPage;
+    contentToChange = htmlPage;
 }
 
 function homepage(): void 
