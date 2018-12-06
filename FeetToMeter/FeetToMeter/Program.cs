@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace MotionsberegnerApp
 {
@@ -6,13 +9,25 @@ namespace MotionsberegnerApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(new StepCalculator().StepsToMeter(25));
-            
-            Console.WriteLine(new StepCalculator().StepsToKilometer(25));
-            
+            List<double> stepDataList = CSVReader.CSVStreamValues(@"C:\source\Important tasks\3.sem Project\motionsberegner\tracker\data2.csv");
 
-            Console.WriteLine(new BMICalculator().CalcBMI(70, 175) );
+            List<double> peakList = PeakDetection.FindPeaks(stepDataList,5);
+
+            Console.WriteLine(peakList.Count);
+
+            Console.ReadLine();
+
+
+
+            Console.WriteLine(new StepCalculator().StepsToMeter(25));
+
+            Console.WriteLine(new StepCalculator().StepsToKilometer(25));
+
+
+            Console.WriteLine(new BMICalculator().CalcBMI(70, 175));
             Console.ReadKey();
+
+
 
         }
     }

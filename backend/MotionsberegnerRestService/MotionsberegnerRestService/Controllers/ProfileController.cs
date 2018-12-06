@@ -127,7 +127,7 @@ namespace MotionsberegnerRestService.Controllers
                                 if (!reader.IsDBNull(6) && !reader.IsDBNull(7) && !reader.IsDBNull(8))
                                 {
                                     profile.Steps.Add(
-                                        new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+                                        new StepData(reader.GetInt32(6), profile.ID, reader.GetInt32(7), reader.GetDateTime(8))
                                     );
                                 }
                                 
@@ -177,7 +177,7 @@ namespace MotionsberegnerRestService.Controllers
 								if (!reader.IsDBNull(6) && !reader.IsDBNull(7) && !reader.IsDBNull(8))
 								{
 									profile.Steps.Add(
-										new StepData(reader.GetInt32(4), profile.ID, reader.GetInt32(5), reader.GetDateTime(6))
+										new StepData(reader.GetInt32(6), profile.ID, reader.GetInt32(7), reader.GetDateTime(8))
 									);
 								}
 
