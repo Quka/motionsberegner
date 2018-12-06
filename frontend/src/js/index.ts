@@ -113,9 +113,11 @@ function profilePage(): string {
         "<div id='birthday'></div><br>" +
 
     "<h7>Vægt</h7><br><br>" + 
+    "<div id='weight'></div><br>" +
     // Indsæt database data her
 
     "<h7>Højde</h7><br><br>" + 
+    "<div id='height'></div><br>" +
     // Indsæt database data her
 
     "<h7>Antal skridt</h7><br><br>";
@@ -234,7 +236,7 @@ function getAllProfiles():void {
     {
         response.data.forEach((profile : IProfile) => {
             //console.log(profile);
-            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + " " + "Weight:" + " " + profile.weight + "Height:" + " " + profile.height + "</li>";
+            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + " " + "Weight:" + " " + profile.weight + " " + "Height:" + " " + profile.height + "</li>";
         });
     })
     .then(function(response)
