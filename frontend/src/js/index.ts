@@ -32,7 +32,6 @@ loginBtn.addEventListener('click', () => {
     let loginUsername: string = (<HTMLInputElement>document.getElementById("loginUsername")).value;
     let loginPassword: string = (<HTMLInputElement>document.getElementById("loginPassword")).value;
     
-<<<<<<< HEAD
     login.Authenticate(uri, loginUsername, loginPassword)
     .then((response) => {
         if(response) {
@@ -49,23 +48,6 @@ loginBtn.addEventListener('click', () => {
     })
     .catch((error) => {
         console.log(error);
-=======
-    login.Authenticate(uri, loginUsername, loginPassword);
-
-    // Change the page
-    changePage(pProfile.getPage());
-
-    // Add eventlistenter to the added btn above
-    let editProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("editProfileBtn");
-    editProfileBtn.addEventListener('click', () => {
-        element.appendChild(pProfile.getEditProfileBox());
-
-        // Add eventlistenter to the added btn above
-        let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
-        saveProfileBtn.addEventListener('click', () => {
-            pProfile.updateProfile(uri, 1);
-        });
->>>>>>> d799f3e387b1b32ca64b64a92aa47136afb903d8
     });
 });
 
