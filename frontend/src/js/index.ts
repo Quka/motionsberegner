@@ -1,8 +1,11 @@
 import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index";
 import { IProfile } from "./IProfile";
+import { Login } from "./Login";
 import { ProfilePage } from "./Views/ProfilePage";
 
+let login: Login = new Login();
 let pProfile: ProfilePage = new ProfilePage();
+let userProfile: IProfile;
 
 // URL to our online webservice
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
@@ -21,8 +24,17 @@ let element: HTMLDivElement = <HTMLDivElement>document.getElementById("content")
 // which gets passed an html page, it then sets the new page
 let loginBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("loginButton");
 loginBtn.addEventListener('click', () => {
-    
 
+    /**
+     * Login user when pressing login button
+     */
+    let loginUsername: string = (<HTMLInputElement>document.getElementById("loginUsername")).value;
+    let loginPassword: string = (<HTMLInputElement>document.getElementById("loginPassword")).value;
+    
+    login.Authenticate(uri, loginUsername, loginPassword);
+    
+    
+    
 
     // Change the page
     changePage(pProfile.getPage());
@@ -189,6 +201,12 @@ function getProfileById(): void {
 
         let ProfileBday = document.getElementById("birthday"); 
         ProfileBday.innerHTML = String (response.data.birthday);
+
+        let ProfileWeight = document.getElementById("weight");
+        ProfileWeight.innerHTML = String (response.data.weight);
+
+        let ProfileHeight = document.getElementById("height");
+        ProfileHeight.innerHTML = String (response.data.height);
         
         // response.data.steps.forEach( steps => {
         //     html += steps.steps 
@@ -234,13 +252,19 @@ function createProfile(): void {
         let firstName : HTMLInputElement = <HTMLInputElement> document.getElementById("firstName");
         let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
         let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
+        let weight : HTMLInputElement = <HTMLInputElement> document.getElementById("weight")
+        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("Højde")
 
         let myFirstname:string = firstName.value;
         let myLastame:string = lastName.value;
         let myBirthday:Number = Number (birthday.value);
+        let myWeight:Number = Number (weight.value);
+        let myHeight:Number = Number (height.value);
+
+
         //let result : IProfile = {firstName: firstName.value , lastName : lastName.value, birthday : birthday.valueAsDate};
         
-        axios.post<IProfile[]> (uri, {firstname:myFirstname, lastname:myLastame, birthDay:myBirthday})
+        axios.post<IProfile[]> (uri, {firstname:myFirstname, lastname:myLastame, birthDay:myBirthday, weight:myWeight, height:myHeight})
         .then((Response:AxiosResponse) => {
             console.log(Response);
         })
