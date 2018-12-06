@@ -50,34 +50,27 @@ loginBtn.addEventListener('click', () => {
 });
 
 
-/**
- * = = = = = = = = = = = = = = = = = = = = = = = = 
- * OPRET PROFILE PAGE EVENTS
- * = = = = = = = = = = = = = = = = = = = = = = = = 
- */
-let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("opretButton"); // OPRET PAGE
+    // HOMEPAGE TO CREATE PROFILE PAGE
+//let CreateProfilePage : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfilePage") 
+let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("CreateProfilePageButton"); 
 btn2.addEventListener('click', removeToOpret);
 
-//let backButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("backButton") //BACK TO HOMEPAGE
-//backButton.addEventListener('click', backToHomePage);
-
-// Get profile by id button
+    // GET PROFILE BY ID BUTTON
 let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
 let btn3: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getButton");
 btn3.addEventListener('click', getProfileById);
 
-/*****************************************************************************************************/
-    //GET ALL PROFILES
+
+    //GET ALL PROFILES BUTTON
 let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
 let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
 btn4.addEventListener('click', getAllProfiles)
 
-// Create profile button
-//let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
+    // CREATE PROFILE BUTTON 
 let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
 btn5.addEventListener('click', createProfile);
 
-// Delete profile button
+    // DELETE PROFILE BUTTON
 let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
 btn6.addEventListener('click', deleteProfile);
 
@@ -92,7 +85,7 @@ function homepage(): void
     "<input id=input placeholder='Indtast brugernavn her'><br>"
     "<input id=input placeholder='Indtast kodeord her'>"
     "<button id=loginButton>Login</button>"
-    "<button id=opretButton>Opret profil</button>"
+    "<button id=createButton>Opret profil</button>"
 }
 
 /*****************************************************************************************************/
@@ -130,25 +123,21 @@ function profilePage(): string {
 function opretProfilPage(): string {
     let html = "";
     html = "<h2>Opret profil</h2> ";
-    html += "<h6>Brugeroplysninger</h6><br>";
+    html +="<h6>Brugeroplysninger</h6><br>";
     html += 
     "<h7>Navn</h7><br>" + 
-        "<input id=opret placeholder='Indtast fornavn her'><br><br>" +
+        "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
     "<h7>Efternavn</h7><br>" + 
-        "<input id=input placeholder='Indtast efternavn her'><br><br>" +
+        "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
     "<h7>Fødselsdato</h7><br>" + 
-        "<input id=input placeholder='Indtast fødselsdato her'><br><br>" +
+    "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
     "<h7>Vægt</h7><br>" + 
-        "<input id=input placeholder='Indtast vægt her'><br><br>" +
+    "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
     "<h7>Højde</h7><br>" + 
-        "<input id=input placeholder='Indtast højde her'><br><br>"+
+    "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
 
-<<<<<<< HEAD
-    "<button id=opretButton> Gem og opret profil </button>";
-=======
-    "<button id=opretButton>Gem og opret profil</button>";
->>>>>>> c5541a2537d06ea8a7ecf138b8bba27242417a40
-    
+    "<button id=createProfileButton> Gem og opret profil </button>";
+
     return html;
 }
 
@@ -196,11 +185,6 @@ function getProfileById(): void {
         //Removes an element from the document
         var element = document.getElementById("content");
         element.innerHTML = profilePage();
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> c5541a2537d06ea8a7ecf138b8bba27242417a40
         let ProfileFName = document.getElementById("name"); 
         ProfileFName.innerHTML = response.data.firstName;
 
