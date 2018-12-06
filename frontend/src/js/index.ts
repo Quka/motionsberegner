@@ -2,6 +2,7 @@ import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index"
 import { IProfile } from "./IProfile";
 import { Login } from "./Login";
 import { ProfilePage } from "./Views/ProfilePage";
+import { CreateProfilePage } from "./Views/CreateProfilePage";
 
 
 // URL to our online webservice
@@ -9,6 +10,7 @@ let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsit
 
 let login: Login = new Login();
 let pProfile: ProfilePage = new ProfilePage();
+let pCreateProfile: CreateProfilePage = new CreateProfilePage(uri);
 
 
 
@@ -50,12 +52,16 @@ loginBtn.addEventListener('click', () => {
         console.log(error);
     });
 });
-
+ 
 
     // HOMEPAGE TO CREATE PROFILE PAGE
 //let CreateProfilePage : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfilePage") 
-let btn2: HTMLButtonElement = <HTMLButtonElement>document.getElementById("CreateProfilePageButton"); 
-btn2.addEventListener('click', removeToOpret);
+let CreateProfilePageButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById("CreateProfilePageButton"); 
+CreateProfilePageButton.addEventListener('click', () => {
+    changePage(
+        pCreateProfile.getPage( element )
+    );
+});
 
     // GET PROFILE BY ID BUTTON
 let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
@@ -67,16 +73,6 @@ btn3.addEventListener('click', getProfileById);
 let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
 let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
 btn4.addEventListener('click', getAllProfiles)
-
-<<<<<<< HEAD
-    // CREATE PROFILE BUTTON 
-let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("CreateProfileButton")
-=======
-// Create profile button
-//let CreateProfile : HTMLDivElement = <HTMLDivElement> document.getElementById("CreateProfile") 
-let btn5: HTMLButtonElement = <HTMLButtonElement> document.getElementById("opretProfileButton")
->>>>>>> 7cffe94537a756f722c691604ad51989c484ba47
-btn5.addEventListener('click', createProfile);
 
     // DELETE PROFILE BUTTON
 let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
@@ -98,107 +94,6 @@ function homepage(): void
 
 /*****************************************************************************************************/
 
-function profilePage(): string {
-    let html;
-    
-    html = "<h2>Profil</h2> ";
-    html += "<h6>Brugeroplysninger</h6><br>";
-    html += 
-    "<h7 id='navn'>Navn</h7><br><br>" + 
-        "<div id='name'></div><br>" +
-
-    "<h7>Efternavn</h7><br><br>" + 
-        "<div id='lastname'></div><br>" +
-
-    "<h7>Fødselsdato</h7><br><br>" + 
-        "<div id='birthday'></div><br>" +
-
-    "<h7>Vægt</h7><br><br>" + 
-    "<div id='weight'></div><br>" +
-    // Indsæt database data her
-
-    "<h7>Højde</h7><br><br>" + 
-    "<div id='height'></div><br>" +
-    // Indsæt database data her
-
-    "<h7>Antal skridt</h7><br><br>";
-
-    return html;
-}
-
-/*****************************************************************************************************/
-
-function opretProfilPage(): string {
-    let html = "";
-    html = "<h2>Opret profil</h2> ";
-    html +="<h6>Brugeroplysninger</h6><br>";
-    html += 
-<<<<<<< HEAD
-    "<h7>Navn</h7><br>" + 
-        "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
-    "<h7>Efternavn</h7><br>" + 
-        "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
-    "<h7>Fødselsdato</h7><br>" + 
-    "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
-    "<h7>Vægt</h7><br>" + 
-    "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
-    "<h7>Højde</h7><br>" + 
-    "<input type=input id=firstName placeholder='Fornavn'><br><br>" +
-
-    "<button id=createProfileButton> Gem og opret profil </button>";
-
-=======
-    "<h7>Foravn</h7><br>" + 
-        "<input id='firstName' placeholder='Indtast fornavn her'><br><br>" +
-    "<h7>Efternavn</h7><br>" + 
-        "<input id='lastName' placeholder='Indtast efternavn her'><br><br>" +
-    "<h7>Fødselsdato</h7><br>" + 
-        "<input id='birthday' placeholder='Indtast fødselsdato her'><br><br>" +
-    "<h7>Vægt</h7><br>" + 
-        "<input id='weight' placeholder='Indtast vægt her'><br><br>" +
-    "<h7>Højde</h7><br>" + 
-        "<input id='height' placeholder='Indtast højde her'><br><br>"+
-
-    "<button id='opretProfileButton'>Gem og opret profil</button>";
-    
->>>>>>> 7cffe94537a756f722c691604ad51989c484ba47
-    return html;
-}
-
-// Go to profile page
-function removeToProfil() : void {
-    // Removes an element from the document
-    var element = document.getElementById("content");
-    element.innerHTML = profilePage();
-}
-
-/*****************************************************************************************************/
-
-function removeToOpret() : void {
-    // Removes an element from the document
-    var element = document.getElementById("content");
-    element.innerHTML = opretProfilPage();
-}
-
-/*****************************************************************************************************/
-
-
-// function backToHomePage(): void {
-//     // Removes an element from the document
-//     //var element = document.getElementById("content");
-//     if(lastPage = "profilePage") {
-//         profilePage();
-//     }
-//     else if(lastPage = "opretProfilPage") {
-//         opretProfilPage();
-//     }
-//     else if(lastPage = "homepage") {
-//         homepage();
-//     }
-// }
-
-/*****************************************************************************************************/
-
     /*GET ONE PROFILE*/
 function getProfileById(): void {  
     let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
@@ -208,7 +103,7 @@ function getProfileById(): void {
     {
         //Removes an element from the document
         var element = document.getElementById("content");
-        element.innerHTML = profilePage();
+        //element.innerHTML = profilePage();
         let ProfileFName = document.getElementById("name"); 
         ProfileFName.innerHTML = response.data.firstName;
 
@@ -233,16 +128,6 @@ function getProfileById(): void {
     })
 }
 
-/*
-function createNewProfile(): void {
-        let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
-        let lastName : HTMLInputElement = document.getElementById("lastName") as HTMLInputElement;
-        let birthday : HTMLInputElement = document.getElementById("birthday") as HTMLInputElement;
-        let weight : HTMLInputElement = document.getElementById("weight") as HTMLInputElement;
-        let height : HTMLInputElement = document.getElementById("height") as HTMLInputElement;
-        let result : IProfile;
-    
-}
 
 /*****************************************************************************************************/
 
@@ -262,32 +147,6 @@ function getAllProfiles():void {
         res += "</ul>";
         AllProfiles.innerHTML = res;
     });
-}
-
-// Create profile function
-function createProfile(): void {
-        let firstName : HTMLInputElement = <HTMLInputElement> document.getElementById("firstName");
-        let lastName : HTMLInputElement = <HTMLInputElement> document.getElementById("lastName");
-        let birthday : HTMLInputElement = <HTMLInputElement> document.getElementById("birthday");
-        let weight : HTMLInputElement = <HTMLInputElement> document.getElementById("weight")
-        let height : HTMLInputElement = <HTMLInputElement> document.getElementById("height")
-
-        let myFirstname:string = firstName.value;
-        let myLastame:string = lastName.value;
-        let myBirthday:Number = Number (birthday.value);
-        let myWeight:Number = Number (weight.value);
-        let myHeight:Number = Number (height.value);
-
-
-        //let result : IProfile = {firstName: firstName.value , lastName : lastName.value, birthday : birthday.valueAsDate};
-        
-        axios.post<IProfile[]> (uri, {firstname:myFirstname, lastname:myLastame, birthDay:myBirthday, weight:myWeight, height:myHeight})
-        .then((Response:AxiosResponse) => {
-            console.log(Response);
-        })
-        .catch((error:AxiosError) => {
-            console.log(error);
-        })
 }
     
 // Delete function
