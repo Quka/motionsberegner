@@ -190,7 +190,7 @@ function getProfileById(): void {
         //Removes an element from the document
         var element = document.getElementById("content");
         element.innerHTML = profilePage();
-        
+
         let ProfileFName = document.getElementById("name"); 
         ProfileFName.innerHTML = response.data.firstName;
 
@@ -234,7 +234,7 @@ function getAllProfiles():void {
     {
         response.data.forEach((profile : IProfile) => {
             //console.log(profile);
-            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "Weight;" + profile.weight + "Height:" + profile.height + "</li>";
+            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + " " + "Weight:" + " " + profile.weight + "Height:" + " " + profile.height + "</li>";
         });
     })
     .then(function(response)
