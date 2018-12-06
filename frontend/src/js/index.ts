@@ -150,22 +150,31 @@ function getAllProfiles():void {
 // getAllProfiles();
 
 function getProfileById(): void {
-       let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
-       let result  = uri + id.value;
+    let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
+    let result  = uri + id.value;
+    let html: string;
+
     axios.get<IProfile>(result)
-       .then(function(response){
-           console.log(response);
-        //resultOfProfileById.innerHTML =  response.data.firstName + "   " + response.data.lastName + "   "  + response.data.birthday;
-      })
-    
-    }
+    .then(function(response){
+        console.log(response.data);
+        html += "";
+        
+        html +=  " Firstname: " + response.data.firstName + ".   " + "Lastname: " + response.data.lastName + ".   " + "Birthday: "  + response.data.birthday + ". " + "Steps: ";
 
+        response.data.steps.forEach( steps => {
+            html += steps.steps 
+        });
+        
+        resultOfProfileById.innerHTML = html;
+    });
+}
 
+/*
 function createNewProfile(): void {
         let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
         let lastName : HTMLInputElement = document.getElementById("lastName") as HTMLInputElement;
         let birthday : HTMLInputElement = document.getElementById("birthday") as HTMLInputElement;
-        let result : IProfile = {firstName: firstName.value , lastName : lastName.value, birthday : birthday.valueAsDate};
+        let result : IProfile;
         
         axios.post<IProfile>(uri, result)
         }
@@ -177,3 +186,4 @@ function deleteProfile(): void {
 
     axios.delete(result);
     }        
+    */
