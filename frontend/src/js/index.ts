@@ -190,6 +190,7 @@ function getProfileById(): void {
         //Removes an element from the document
         var element = document.getElementById("content");
         element.innerHTML = profilePage();
+        
         let ProfileFName = document.getElementById("name"); 
         ProfileFName.innerHTML = response.data.firstName;
 
@@ -217,6 +218,8 @@ function createNewProfile(): void {
         let firstName : HTMLInputElement  = document.getElementById("firstName") as HTMLInputElement;
         let lastName : HTMLInputElement = document.getElementById("lastName") as HTMLInputElement;
         let birthday : HTMLInputElement = document.getElementById("birthday") as HTMLInputElement;
+        let weight : HTMLInputElement = document.getElementById("weight") as HTMLInputElement;
+        let height : HTMLInputElement = document.getElementById("height") as HTMLInputElement;
         let result : IProfile;
     
 }
@@ -231,7 +234,7 @@ function getAllProfiles():void {
     {
         response.data.forEach((profile : IProfile) => {
             //console.log(profile);
-            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "</li>";
+            res += "<li>"+ "ID:"+ " "  + "   " + "First name:" + " " + profile.firstName + "   " + "Last name:" + " " + profile.lastName + "   " +  "Birthday:" + " " + profile.birthday.toString() + "Weight;" + profile.weight + "Height:" + profile.height + "</li>";
         });
     })
     .then(function(response)
