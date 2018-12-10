@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index"
 import { IProfile } from "./IProfile";
 
 export class Login {
-    public static loggedInProfile: IProfile;
+    public loggedInProfile: IProfile;
 
     /**
      *
@@ -14,12 +14,21 @@ export class Login {
         
         let promise = axios.get<IProfile>(uri + "/username/" + username)
         .then((response) => {
-            //console.log(response);
+            console.log(response);
 
             if(response.status == 200) {
-                Login.loggedInProfile = <IProfile> response.data;
+                let profileData: IProfile = <IProfile> response.data;
 
-                return true;
+                // Validate username and password
+                // Password is hardcoded
+                if(username.toLowerCase() == (profileData.firstName).toLowerCase()
+                   && password ==  "test1234") {
+                    this.loggedInProfile = profileData;
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
             
             return false;
