@@ -64,19 +64,19 @@ CreateProfilePageButton.addEventListener('click', () => {
 });
 
     // GET PROFILE BY ID BUTTON
-let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
+/* let ProfileById: HTMLDivElement = <HTMLDivElement> document.getElementById("ProfileById") 
 let btn3: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getButton");
-btn3.addEventListener('click', getProfileById);
+btn3.addEventListener('click', getProfileById);*/
 
 
     //GET ALL PROFILES BUTTON
-let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
+/*let AllProfiles : HTMLDivElement = <HTMLDivElement> document.getElementById("AllProfiles") 
 let btn4: HTMLButtonElement = <HTMLButtonElement> document.getElementById("getAllButton")
-btn4.addEventListener('click', getAllProfiles)
+btn4.addEventListener('click', getAllProfiles)*/
 
     // DELETE PROFILE BUTTON
-let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
-btn6.addEventListener('click', deleteProfile);
+/*let btn6: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton")
+btn6.addEventListener('click', deleteProfile);*/
 
 function changePage(htmlPage: HTMLElement) {
     var contentToChange = document.getElementById("content");
@@ -94,7 +94,7 @@ function homepage(): void
 
 /*****************************************************************************************************/
 
-    /*GET ONE PROFILE*/
+/*GET ONE PROFILE*/
 function getProfileById(): void {  
     let id : HTMLInputElement = document.getElementById("idToGet") as HTMLInputElement;
     let result  = uri + id.value;
@@ -131,7 +131,8 @@ function getProfileById(): void {
 
 /*****************************************************************************************************/
 
-    /*GET ALL PROFILES*/
+/*GET ALL PROFILES*/
+/*
 function getAllProfiles():void {
     let res: string = "<ul>";
 
@@ -148,6 +149,7 @@ function getAllProfiles():void {
         AllProfiles.innerHTML = res;
     });
 }
+*/
     
 // Delete function
 function deleteProfile(): void {
