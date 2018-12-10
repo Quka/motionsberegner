@@ -8,6 +8,8 @@ namespace MotionsberegnerApp
     {
         public static List<double> CSVStreamValues(string Datapath)
         {
+
+            // En klasse som bruger en fil path til at hente en CSV fil og splitte den op i 4 forskellige lister.
             using (var reader = new StreamReader(Datapath))
             {
                 List<string> listA = new List<string>();

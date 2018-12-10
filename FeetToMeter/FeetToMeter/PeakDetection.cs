@@ -6,6 +6,8 @@ namespace MotionsberegnerApp
 {
     public static class PeakDetection
     {
+        // En klasse der tager en list af doubles og en double for at kunne lave peak detection på en liste
+
         public static List<double> FindPeaks(List<double> values, double rangeOfPeaks)
         {
             List<double> peaks = new List<double>();

@@ -13,7 +13,15 @@ namespace MotionsberegnerApp
 
             List<double> peakList = PeakDetection.FindPeaks(stepDataList,5);
 
+
+            foreach (var number in peakList)
+            {
+                Console.WriteLine(number);
+            }
+
+
             Console.WriteLine(peakList.Count);
+
 
             Console.ReadLine();
 
