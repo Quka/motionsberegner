@@ -22,7 +22,7 @@ namespace MotionsberegnerRestService.Controllers
         {
             List<StepData> result = new List<StepData>();
 
-            string sql = "SELECT id, steps, logDate FROM StepData "; //SQL Command
+            string sql = "SELECT id, profileId, steps, logDate FROM StepData "; //SQL Command
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
