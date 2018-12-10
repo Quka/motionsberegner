@@ -15,7 +15,6 @@ let pCreateProfile: CreateProfilePage = new CreateProfilePage(uri);
 
 
 // Content is used to fill the html page
-let lastPage: string = "";
 let element: HTMLElement = document.getElementById("content") as HTMLElement;
 
 /**
