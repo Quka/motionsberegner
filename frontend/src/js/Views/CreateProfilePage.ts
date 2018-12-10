@@ -42,10 +42,31 @@ export class CreateProfilePage {
         let profileBirthdayInput: HTMLElement = <HTMLElement> document.createElement("input");
             profileBirthdayInput.id = "createBirthday";
             profileBirthdayArea.appendChild(profileBirthdayInput);
+        
+        let profileWeightArea: HTMLElement = <HTMLElement> document.createElement("div");
+            profileWeightArea.innerHTML = "Vægt: ";
+        let profileWeightInput: HTMLElement = <HTMLElement> document.createElement("input");
+            profileWeightInput.id = "createWeight";
+            profileWeightArea.appendChild(profileWeightInput);
+
+        let profileHeightArea: HTMLElement = <HTMLElement> document.createElement("div");
+            profileHeightArea.innerHTML = "Højde: ";
+        let profileHeightInput: HTMLElement = <HTMLElement> document.createElement("input");
+            profileHeightInput.id = "createHeight";
+            profileHeightArea.appendChild(profileHeightInput);
+
+        // let profileStepsArea: HTMLElement = <HTMLElement> document.createElement("div");
+        //     profileStepsArea.innerHTML = "Skridt: ";
+        // let profileStepsInput: HTMLElement = <HTMLElement> document.createElement("input");
+        //     profileStepsInput.id = "createSteps";
+        //     profileStepsArea.appendChild(profileStepsInput);
 
             profileInfo.appendChild(profileFirstnameArea);
             profileInfo.appendChild(profileLastnameArea);
             profileInfo.appendChild(profileBirthdayArea);
+            profileInfo.appendChild(profileWeightArea);
+            profileInfo.appendChild(profileHeightArea);
+            // profileInfo.appendChild(profileStepsArea);
         
         
         let CreateProfileBtn: HTMLElement = <HTMLElement> document.createElement("button");
@@ -53,19 +74,6 @@ export class CreateProfilePage {
             CreateProfileBtn.className = "btn";
             CreateProfileBtn.id = "saveCreateProfileBtn";
             
-        /*
-        html += "<h7>Navn</h7><br><br>" + 
-        // Indsæt database data her
-        "<h7>Efternavn</h7><br><br>" + 
-        // Indsæt database data her
-        "<h7>Fødselsdato</h7><br><br>" + 
-        // Indsæt database data her
-        "<h7>Vægt</h7><br><br>" + 
-        // Indsæt database data her
-        "<h7>Højde</h7><br><br>" + 
-        // Indsæt database data her
-        "<h7>Antal skridt</h7><br><br>";
-        */
 
         parentHtml.appendChild(title);
         parentHtml.appendChild(subTitle);
