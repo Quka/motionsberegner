@@ -57,7 +57,7 @@ export class ProfilePage {
         });
         
         deleteProfileBtn.addEventListener('click', () => {
-            this.deleteProfile(this.uri, Login.loggedInProfile.id);
+            //this.deleteProfile(this.uri, Login.loggedInProfile.id);
         });
 
         parentHtml.appendChild(title);
@@ -85,7 +85,7 @@ export class ProfilePage {
         // Add eventlistenter to the added btn above
         let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
         saveProfileBtn.addEventListener('click', () => {
-            this.updateProfile(this.uri, Login.loggedInProfile.id);
+            //this.updateProfile(this.uri, Login.loggedInProfile.id);
         });
         
 
