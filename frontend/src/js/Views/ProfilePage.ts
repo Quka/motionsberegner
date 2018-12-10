@@ -1,12 +1,14 @@
 import axios, { AxiosResponse, AxiosError} from "../../../node_modules/axios/index";
 import { IProfile } from "../IProfile";
+import { Login } from "../Login";
 
 export class ProfilePage {
+    uri: string;
     /**
      *
      */
-    constructor() {
-        
+    constructor(uri: string) {
+        this.uri = uri;
     }
 
     getPage(parentHtml: HTMLElement): HTMLElement {
@@ -24,6 +26,12 @@ export class ProfilePage {
             editProfileBtn.innerHTML = "Edit";
             editProfileBtn.className = "btn";
             editProfileBtn.id = "editProfileBtn";
+
+        let deleteProfileBtn: HTMLElement = <HTMLElement> document.createElement("button");
+            deleteProfileBtn.innerHTML = "Delete";
+            deleteProfileBtn.className = "btn";
+            deleteProfileBtn.id = "deleteProfileBtn";
+        
         
         let profileInfo: HTMLElement = <HTMLElement> document.createElement("div");
             profileInfo.innerHTML = "empty as default";
@@ -47,6 +55,10 @@ export class ProfilePage {
         editProfileBtn.addEventListener('click', () => {
             parentHtml.appendChild(this.getEditProfileBox());
         });
+        
+        deleteProfileBtn.addEventListener('click', () => {
+            this.deleteProfile(this.uri, Login.loggedInProfile.id);
+        });
 
         parentHtml.appendChild(title);
         parentHtml.appendChild(subTitle);
@@ -69,13 +81,13 @@ export class ProfilePage {
         html += "<button id='saveProfileBtn'>Save profile</button>";
         html += "<button id='closeProfilBtn'>Close</button>";
 
-        /*
+        
         // Add eventlistenter to the added btn above
         let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
         saveProfileBtn.addEventListener('click', () => {
-            pProfile.updateProfile(uri, 1);
+            this.updateProfile(this.uri, Login.loggedInProfile.id);
         });
-        */
+        
 
         divRes.innerHTML = html;
 
@@ -90,6 +102,7 @@ export class ProfilePage {
         let heightVal: number = Number((<HTMLInputElement> document.getElementById("editHeight")).value);
 
         let p: IProfile = <IProfile> {
+            id: null,
             firstName: firstNameVal,
             lastName: lastNameVal,
             birthday: birthdayVal,
@@ -110,4 +123,10 @@ export class ProfilePage {
             console.log(error);
         });
     }
+
+    deleteProfile(uri: string, id:number): void {
+        axios.delete(uri + id);
+    }
+
+    
 }

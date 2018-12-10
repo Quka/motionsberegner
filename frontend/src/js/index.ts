@@ -9,7 +9,7 @@ import { CreateProfilePage } from "./Views/CreateProfilePage";
 let uri : string = "https://motionsberegnerrestservice20181203104407.azurewebsites.net/api/profile/";
 
 let login: Login = new Login();
-let pProfile: ProfilePage = new ProfilePage();
+let pProfile: ProfilePage = new ProfilePage(uri);
 let pCreateProfile: CreateProfilePage = new CreateProfilePage(uri);
 
 

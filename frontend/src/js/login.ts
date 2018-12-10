@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError} from "../../node_modules/axios/index"
 import { IProfile } from "./IProfile";
 
 export class Login {
-    public loggedInProfile: IProfile;
+    public static loggedInProfile: IProfile;
 
     /**
      *
@@ -17,7 +17,7 @@ export class Login {
             //console.log(response);
 
             if(response.status == 200) {
-                this.loggedInProfile = <IProfile> response.data;
+                Login.loggedInProfile = <IProfile> response.data;
 
                 return true;
             }
