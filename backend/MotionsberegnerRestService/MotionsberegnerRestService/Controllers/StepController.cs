@@ -75,7 +75,7 @@ namespace MotionsberegnerRestService.Controllers
 
                 using (SqlCommand cmd = new SqlCommand(sql, databaseConnection))
                 {
-                    cmd.Parameters.AddWithValue("@profileId", stepData.FId); //@firstName er placeholder og bliver erstattet af 'customer.FirstName'
+                    cmd.Parameters.AddWithValue("@profileId", stepData.FId); //@profileId er placeholder og bliver erstattet af 'stepData.FId'
                     cmd.Parameters.AddWithValue("@steps", stepData.Steps);
                     cmd.Parameters.AddWithValue("@logDate", stepData.LogDate);
 
