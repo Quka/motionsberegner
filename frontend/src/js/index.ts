@@ -70,10 +70,3 @@ function changePage(htmlPage: HTMLElement) {
     var contentToChange = document.getElementById("content");
     contentToChange = htmlPage;
 }
-    
-// Delete function
-function deleteProfile(): void {
-    let id : HTMLInputElement = document.getElementById("idToDelete") as HTMLInputElement;
-    let result = uri + id.value;
-    axios.delete(result);
-}
