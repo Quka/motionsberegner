@@ -221,7 +221,7 @@ namespace MotionsberegnerRestService.Controllers
         public int Put(int id, [FromBody] Profile p)
         {
 	        int resId = 0;
-	        string sql = "UPDATE Profil SET firstname = @firstName, lastname = @lastName, birthday = @birthday OUTPUT INSERTED.id WHERE id = @id";
+	        string sql = "UPDATE Profil SET firstname = @firstName, lastname = @lastName, birthday = @birthday, weight = @weight, height = @height OUTPUT INSERTED.id WHERE id = @id";
 
 	        using (SqlConnection sqlConnection = new SqlConnection(conn))
 	        {
