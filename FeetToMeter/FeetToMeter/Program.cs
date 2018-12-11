@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MotionsberegnerApp
 {
@@ -9,26 +13,19 @@ namespace MotionsberegnerApp
     {
         static void Main(string[] args)
         {
+            List<DateTime> dateList = CSVReader.CSVStreamDateLog(@"C:\source\Important tasks\3.sem Project\motionsberegner\tracker\data2.csv");
             List<double> stepDataList = CSVReader.CSVStreamValues(@"C:\source\Important tasks\3.sem Project\motionsberegner\tracker\data2.csv");
 
             List<double> peakList = PeakDetection.FindPeaks(stepDataList,5);
+            int stepCount = peakList.Count;
+            DateTime LatestDate = dateList.Last();
 
-            Console.WriteLine(peakList.Count);
+            StepData data = new StepData(2, 1, stepCount, LatestDate);
 
-            Console.ReadLine();
+            StepConsumer.AddStepDataAsync(data);
 
-
-
-            Console.WriteLine(new StepCalculator().StepsToMeter(25));
-
-            Console.WriteLine(new StepCalculator().StepsToKilometer(25));
-
-
-            Console.WriteLine(new BMICalculator().CalcBMI(70, 175));
             Console.ReadKey();
-
-
-
+            
         }
     }
 }
