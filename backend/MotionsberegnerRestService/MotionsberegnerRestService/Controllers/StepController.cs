@@ -22,7 +22,7 @@ namespace MotionsberegnerRestService.Controllers
         {
             List<StepData> result = new List<StepData>();
 
-            string sql = "SELECT id, steps, logDate FROM StepData "; //SQL Command
+            string sql = "SELECT id, profileId, steps, logDate FROM StepData "; //SQL Command
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {
@@ -61,11 +61,31 @@ namespace MotionsberegnerRestService.Controllers
             return "value";
         }
 
-        //// POST: api/Step
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        // POST: api/Step
+        [HttpPost]
+        public int Post([FromBody] StepData stepData)
+        {
+            int insId = 0;
+
+            string sql = "INSERT INTO stepData(profileId, steps, logDate) OUTPUT INSERTED.id VALUES(@profileId, @steps, @logDate);"; //SQL Command - OUTPUT INSERTED.id udskriver den valgte kolonne 'id', fra den indsatte række.
+
+            using (SqlConnection databaseConnection = new SqlConnection(conn))
+            {
+                databaseConnection.Open();
+
+                using (SqlCommand cmd = new SqlCommand(sql, databaseConnection))
+                {
+                    cmd.Parameters.AddWithValue("@profileId", stepData.FId); //@firstName er placeholder og bliver erstattet af 'customer.FirstName'
+                    cmd.Parameters.AddWithValue("@steps", stepData.Steps);
+                    cmd.Parameters.AddWithValue("@logDate", stepData.LogDate);
+
+                    insId = (int)cmd.ExecuteScalar(); //Tager kolonnen som bliver returneret i SQL Command (OUTPUT INSERTED.id) og indsætter som 'insId'
+                }
+                
+            }
+
+            return insId;
+        }
 
         //// PUT: api/Step/5
         //[HttpPut("{id}")]

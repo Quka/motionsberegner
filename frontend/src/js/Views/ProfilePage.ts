@@ -1,20 +1,44 @@
 import axios, { AxiosResponse, AxiosError} from "../../../node_modules/axios/index";
 import { IProfile } from "../IProfile";
 
+import { Login } from "../Login";
+
 export class ProfilePage {
+    uri: string;
     /**
      *
      */
-    constructor() {
-        
+    constructor(uri: string) {
+        this.uri = uri;
     }
 
-    getPage(): string {
-        let html: string = "";
+    getPage(parentHtml: HTMLElement): HTMLElement {
+        // Empty the parent html page
+        parentHtml.innerHTML = "";
 
-        html += "<h2>Profil</h2> ";
-        html += "<h6>Brugeroplysninger</h6><br>";
-        html += "<button id='editProfileBtn' class='btn'>Edit</button><br>";
+        // Declare new html elements
+        let title: HTMLElement = <HTMLElement> document.createElement("h1");
+            title.innerHTML = "Profil";
+        
+        let subTitle: HTMLElement = <HTMLElement> document.createElement("h2");
+            subTitle.innerHTML = "Brugeroplysninger";
+        
+        let editProfileBtn: HTMLElement = <HTMLElement> document.createElement("button");
+            editProfileBtn.innerHTML = "Edit";
+            editProfileBtn.className = "btn";
+            editProfileBtn.id = "editProfileBtn";
+
+        let deleteProfileBtn: HTMLElement = <HTMLElement> document.createElement("button");
+            deleteProfileBtn.innerHTML = "Delete";
+            deleteProfileBtn.className = "btn";
+            deleteProfileBtn.id = "deleteProfileBtn";
+        
+        
+        let profileInfo: HTMLElement = <HTMLElement> document.createElement("div");
+            profileInfo.innerHTML = "empty as default";
+            profileInfo.id = "profile-info";
+            
+        /*
         html += "<h7>Navn</h7><br><br>" + 
         // Indsæt database data her
         "<h7>Efternavn</h7><br><br>" + 
@@ -26,8 +50,23 @@ export class ProfilePage {
         "<h7>Højde</h7><br><br>" + 
         // Indsæt database data her
         "<h7>Antal skridt</h7><br><br>";
+        */
 
-        return html;
+        // Add eventlistenter to the added btn above
+        editProfileBtn.addEventListener('click', () => {
+            parentHtml.appendChild(this.getEditProfileBox());
+        });
+        
+        deleteProfileBtn.addEventListener('click', () => {
+            //this.deleteProfile(this.uri, Login.loggedInProfile.id);
+        });
+
+        parentHtml.appendChild(title);
+        parentHtml.appendChild(subTitle);
+        parentHtml.appendChild(editProfileBtn);
+        parentHtml.appendChild(profileInfo);
+
+        return parentHtml;
     }
 
     getEditProfileBox(): HTMLDivElement {
@@ -43,6 +82,13 @@ export class ProfilePage {
         html += "<button id='saveProfileBtn'>Save profile</button>";
         html += "<button id='closeProfilBtn'>Close</button>";
 
+        
+        // Add eventlistenter to the added btn above
+        let saveProfileBtn: HTMLButtonElement = <HTMLButtonElement>document.getElementById("saveProfileBtn");
+        saveProfileBtn.addEventListener('click', () => {
+            //this.updateProfile(this.uri, Login.loggedInProfile.id);
+        });
+        
 
         divRes.innerHTML = html;
 
@@ -57,6 +103,7 @@ export class ProfilePage {
         let heightVal: number = Number((<HTMLInputElement> document.getElementById("editHeight")).value);
 
         let p: IProfile = <IProfile> {
+            id: null,
             firstName: firstNameVal,
             lastName: lastNameVal,
             birthday: birthdayVal,
@@ -77,4 +124,10 @@ export class ProfilePage {
             console.log(error);
         });
     }
+
+    deleteProfile(uri: string, id:number): void {
+        axios.delete(uri + id);
+    }
+
+    
 }
