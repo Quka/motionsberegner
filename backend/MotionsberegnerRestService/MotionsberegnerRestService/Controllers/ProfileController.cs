@@ -195,7 +195,7 @@ namespace MotionsberegnerRestService.Controllers
         {
             int insId = 0;
 
-            string sql = "INSERT INTO profil(firstname, lastname, birthday) OUTPUT INSERTED.id VALUES(@firstname, @lastname, @birthday);"; //SQL Command - OUTPUT INSERTED.id udskriver den valgte kolonne 'id', fra den indsatte række.
+            string sql = "INSERT INTO profil(firstname, lastname, birthday, weight, height) OUTPUT INSERTED.id VALUES(@firstname, @lastname, @birthday, @weight, @height);"; //SQL Command - OUTPUT INSERTED.id udskriver den valgte kolonne 'id', fra den indsatte række.
 
             using (SqlConnection databaseConnection = new SqlConnection(conn))
             {

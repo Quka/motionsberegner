@@ -93,11 +93,21 @@ export class ProfilePage {
 
         // Add eventlistenter to the added btn above
         editProfileBtn.addEventListener('click', () => {
-            parentHtml.appendChild(this.getEditProfileBox());
+            parentHtml.appendChild(
+                this.getEditProfileBox()
+            );
         });
         
         deleteProfileBtn.addEventListener('click', () => {
-            //this.deleteProfile(this.uri, Login.loggedInProfile.id);
+            this.deleteProfile(this.uri, this.login.loggedInProfile.id)
+            .then((resp) => {
+                if(resp) {
+                    window.location.reload();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         });
 
         parentHtml.appendChild(title);
@@ -164,10 +174,10 @@ export class ProfilePage {
         let profileInfoHeight: HTMLElement = <HTMLElement> document.createElement("label");
             profileInfoHeight.innerHTML = "<p>Højde: </p> ";
         let profileInfoHeightInput: HTMLInputElement = <HTMLInputElement> document.createElement("input");
-            profileInfoHeightInput.type = "text";
+            profileInfoHeightInput.type = "number";
             profileInfoHeightInput.name = "editHeight";
             profileInfoHeightInput.id = "editHeight";
-            profileInfoHeightInput.value = String( this.login.loggedInProfile.height );
+            profileInfoHeightInput.valueAsNumber =  this.login.loggedInProfile.height;
             
             profileInfoHeight.appendChild(profileInfoHeightInput);
             profileInfo.appendChild(profileInfoHeight);
@@ -182,6 +192,9 @@ export class ProfilePage {
                 this.updateProfile(this.uri, this.login.loggedInProfile.id)
                 .then((response) => {
                     console.log(response);
+                    if(response) {
+                        window.location.reload();
+                    }
                 })
                 .catch((err) => {
                     console.log(err);
@@ -195,7 +208,7 @@ export class ProfilePage {
             profileInfo.appendChild(profileCloseBtn);
 
             profileCloseBtn.addEventListener('click', () => {
-                // close the div
+                divRes.remove();
             });
 
         divRes.appendChild(profileInfo);
@@ -219,18 +232,19 @@ export class ProfilePage {
             height: heightVal
         }
 
-        console.log(p);
-
-        let promise = axios.put<IProfile>(uri + id, p)
-        .then(function(response: AxiosResponse<IProfile>) {
+        let promise = axios.put<number>(uri + id, p)
+        .then((response: AxiosResponse<number>) => {
             if(response.status == 200) {
-                console.log(response.data);
-                let pRes: IProfile = response.data;
-
-                return true;
+                let profileId: number = <number> response.data;
+                
+                if(profileId == p.id) {
+                    this.login.loggedInProfile = p;
+                    return true;
+                }
             }
+            return false;
         })
-        .catch(function(error){
+        .catch((error) => {
             console.log(error);
             return false;
         });
@@ -238,8 +252,28 @@ export class ProfilePage {
         return promise;
     }
 
-    deleteProfile(uri: string, id:number): void {
-        axios.delete(uri + id);
+    deleteProfile(uri: string, id:number): Promise<boolean> {
+        let conf = confirm("Sikker på du vil slette din konto?");
+
+        if(!conf) {
+            return Promise.resolve(false);
+        }
+        
+        let promise = axios.delete(uri + id)
+        .then((response: AxiosResponse<number>) => {
+            console.log(response);
+            if(response.data == this.login.loggedInProfile.id) {
+                return true;
+            }
+
+            return false;
+        })
+        .catch((error) => {
+            console.log(error);
+            return false;
+        });
+
+        return promise;
     }
 
     // BMI calculator
