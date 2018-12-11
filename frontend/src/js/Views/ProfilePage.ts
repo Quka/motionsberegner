@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, AxiosError} from "../../../node_modules/axios/index";
 import { IProfile } from "../IProfile";
+
 import { Login } from "../Login";
 
 export class ProfilePage {
