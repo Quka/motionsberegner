@@ -22,7 +22,6 @@ export class CreateProfilePage {
             subTitle.innerHTML = "Brugeroplysninger";
         
         let profileInfo: HTMLElement = <HTMLElement> document.createElement("div");
-            profileInfo.innerHTML = "empty as default";
             profileInfo.id = "profile-info";
 
         let profileFirstnameArea: HTMLElement = <HTMLElement> document.createElement("div");
@@ -39,8 +38,9 @@ export class CreateProfilePage {
 
         let profileBirthdayArea: HTMLElement = <HTMLElement> document.createElement("div");
             profileBirthdayArea.innerHTML = "Fødselsdato: ";
-        let profileBirthdayInput: HTMLElement = <HTMLElement> document.createElement("input");
+        let profileBirthdayInput: HTMLInputElement = <HTMLInputElement> document.createElement("input");
             profileBirthdayInput.id = "createBirthday";
+            profileBirthdayInput.placeholder = "1996-05-13T00:00:00";
             profileBirthdayArea.appendChild(profileBirthdayInput);
         
         let profileWeightArea: HTMLElement = <HTMLElement> document.createElement("div");
@@ -104,10 +104,12 @@ export class CreateProfilePage {
             steps: null
         }
 
+        console.log(newProfile);
+
         
         axios.post<IProfile> (uri, newProfile)
         .then((response:AxiosResponse) => {
-            console.log(response);
+            window.location.reload();
         })
         .catch((error:AxiosError) => {
             console.log(error);
