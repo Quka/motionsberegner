@@ -16,11 +16,11 @@ namespace MotionsberegnerApp
             List<DateTime> dateList = CSVReader.CSVStreamDateLog(@"C:\source\Important tasks\3.sem Project\motionsberegner\tracker\data2.csv");
             List<double> stepDataList = CSVReader.CSVStreamValues(@"C:\source\Important tasks\3.sem Project\motionsberegner\tracker\data2.csv");
 
-            List<double> peakList = PeakDetection.FindPeaks(stepDataList,5);
+            List<double> peakList = PeakDetection.FindPeaks(stepDataList,18);
             int stepCount = peakList.Count;
             DateTime LatestDate = dateList.Last();
 
-            StepData data = new StepData(2, 1, stepCount, LatestDate);
+            StepData data = new StepData(1, stepCount, LatestDate);
 
             StepConsumer.AddStepDataAsync(data);
 
